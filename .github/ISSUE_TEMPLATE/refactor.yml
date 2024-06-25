@@ -1,0 +1,34 @@
+name: Refactor Request
+description: Identify a necessary task to be addressed.
+title: "[App Chore]: "
+labels: ["refactor"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide details about the needed refactor.
+  - type: textarea
+    id: current-situation
+    attributes:
+      label: Current Situation
+      description: A brief description of the current circumstance.
+      placeholder: Describe the current situation.
+    validations:
+      required: true
+  - type: textarea
+    id: desired-situation
+    attributes:
+      label: Desired Situation
+      description: A brief description of the necessary action to take.
+      placeholder: Describe the desired outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context (Optional)
+      description: Provide any additional context, examples, or screenshots about the refactor.
+      placeholder: Add any other context, screenshots or links about the refactor.
+    validations:
+      required: false

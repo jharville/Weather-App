@@ -1,0 +1,34 @@
+name: Feature Request
+description: Suggest a new feature or enhancement.
+title: "[Feat]: "
+labels: ["feature", "enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature. Please provide detailed information outlining the feature or enhancement you'd like to make.
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: Is your feature request related to a problem? If so, please describe the problem and how the feature resolves it. E.g., It's always frustrating when...
+      placeholder: Describe the problem you aim to solve.
+    validations:
+      required: false
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Provide a clear and concise description of the feature you are proposing.
+      placeholder: Describe the feature you'd like to see implemented.
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Provide any additional context, examples, mock-ups, or screenshots about the feature request here.
+      placeholder: Add any other context or screenshots about the feature request here.
+    validations:
+      required: false
