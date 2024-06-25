@@ -1,0 +1,244 @@
+#result-background {
+  background-color: #646cff;
+}
+
+#background-video {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#background {
+  background-color: rgb(0, 0, 0);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+#flex-total-container {
+  flex-shrink: 5;
+  flex-grow: 1;
+}
+
+#flex-top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* display: grid; */
+  padding-bottom: 20px;
+}
+
+#flex-bottom-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#temp-city-conditon-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns items vertically within each container */
+  align-items: center; /* Centers items horizontally within each container */
+  z-index: 2;
+}
+
+#temp-city-conditon-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #6a6f8d;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 8px solid #000000;
+  z-index: 2;
+}
+
+#humidity-uv-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns items vertically within each container */
+  align-items: center; /* Centers items horizontally within each container */
+  gap: 20px; /* Adjusts spacing between items */
+  z-index: 2;
+}
+
+#humidity-uv-box {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background-color: #514141;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 8px solid #000000;
+  z-index: 2;
+  padding: 20px;
+}
+
+#forcast-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns items vertically within each container */
+  align-items: center; /* Centers items horizontally within each container */
+  z-index: 2;
+}
+
+#forcast-box {
+  justify-content: center;
+  text-align: center;
+  background-color: #0d658e;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 8px solid #000000;
+  z-index: 2;
+  padding: 20px;
+}
+
+#summary-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns items vertically within each container */
+  align-items: center; /* Centers items horizontally within each container */
+  z-index: 2;
+}
+
+#summary-box {
+  justify-content: center;
+  text-align: center;
+  background-color: #02137e;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 8px solid #000000;
+  z-index: 2;
+  padding: 20px;
+}
+
+#map-box-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Aligns items vertically within each container */
+  align-items: center; /* Centers items horizontally within each container */
+  z-index: 2;
+}
+
+#map-box {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  max-width: 705px;
+  background-color: #36057b;
+  box-sizing: border-box;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 8px solid #000000;
+  z-index: 2;
+  padding: 20px;
+}
+
+#form-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#form {
+  display: flex;
+  /* justify-content: flex-start; */
+}
+
+#input-City {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  height: 65px;
+  width: 150px;
+  font-size: 0.56em;
+  color: #000000;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 5px solid teal;
+  margin-right: 10px;
+}
+
+#get-weather-button {
+  flex-direction: column;
+  align-items: center;
+  max-height: 77px;
+  padding: 0px 30px 0px 30px;
+  border-radius: 10px;
+  border: 5px solid teal;
+  font-size: large;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background-color: #212020;
+  line-height: 30%;
+  cursor: pointer;
+  transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
+
+@media (max-width: 400px) {
+  .flex-grid {
+    display: block;
+  }
+}
+
+h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+  color: #fff;
+}
+
+/* justify-content: {
+  flex-start: Items align to the left side of the container.
+  flex-end: Items align to the right side of the container.
+  center: Items align at the center of the container.
+  space-between: Items display with equal spacing between them.
+  space-around: Items display with equal spacing around them.
+} */
+
+/* align-items: {
+  flex-start: Items align to the top of the container.
+  flex-end: Items align to the bottom of the container.
+  center: Items align at the vertical center of the container.
+  baseline: Items display at the baseline of the container.
+  stretch: Items are stretched to fit the container.
+} */
+
+/* Another property you can apply to individual items is align-self.
+This property accepts the same values as align-items and its value for the specific item. */
+
+/* flex-direction: {
+  row: Items are placed the same as the text direction.
+  row-reverse: Items are placed opposite to the text direction.
+  column: Items are placed top to bottom.
+  column-reverse: Items are placed bottom to top.
+} */
+
+/* order: {
+  order will move objects from left to right/up and down.
+  
+  Example: 
+
+  .red-frog {
+    order: -1;
+  }
+} */

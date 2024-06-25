@@ -1,0 +1,93 @@
+.background-Landing {
+  background-color: rgb(27, 25, 25);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.video-Landing {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+#flex-box-Landing {
+  align-self: center;
+}
+
+.weather-app-container-Landing {
+  text-align: center;
+  max-width: 350px;
+  background: linear-gradient(135deg, #014b30, rgb(5, 3, 162));
+  width: 100%;
+  padding: 0px 20px 30px;
+  box-sizing: border-box;
+  border: solid 8px rgb(48, 47, 47);
+  border-radius: 20px;
+}
+
+.form-and-boxes-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.enter-City-Landing {
+  height: 65px;
+  width: 150px;
+  font-size: 0.55em;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 10px;
+  background-color: #212020;
+  border: 5px solid teal;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.get-weather-button-Landing {
+  height: 77px;
+  width: 120px;
+  border-radius: 10px;
+  border: 5px solid teal;
+  font-size: 0.6em;
+  font-weight: 500;
+  font-family: inherit;
+  color: #fff;
+  background-color: #212020;
+  cursor: pointer;
+  transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  padding: 0;
+}
+
+.get-weather-button-Landing:hover,
+.get-weather-button-Landing:focus {
+  text-shadow: 0 0 10px rgb(6, 201, 255);
+  border-color: rgb(1, 175, 175);
+}
+
+.enter-City-Landing:hover,
+.enter-City-Landing:focus {
+  border-color: #d5dfe1;
+  /* box-shadow: 0 8px 816px rgba(0, 0, 0, 0.3); */
+}
+
+#error-message {
+  padding-top: 15px;
+  text-align: center;
+  font-size: 0.5em;
+  color: red;
+}
