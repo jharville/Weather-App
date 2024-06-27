@@ -29,3 +29,11 @@ body:
         4. See error
     validations:
       required: true
+  - type: textarea
+    id: next-steps
+    attributes:
+      label: Next Steps
+      description: What to do after completion.
+      placeholder: Add the steps to take after completion.
+    validations:
+      required: false

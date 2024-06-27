@@ -32,3 +32,11 @@ body:
       placeholder: Add any other context or screenshots about the feature request here.
     validations:
       required: false
+  - type: textarea
+    id: next-steps
+    attributes:
+      label: Next Steps
+      description: What to do after completion.
+      placeholder: Add the steps to take after completion.
+    validations:
+      required: false
