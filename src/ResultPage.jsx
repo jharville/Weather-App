@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
-// import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
+import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
 
 const ResultPage = () => {
   const location = useLocation();
@@ -63,7 +63,7 @@ const ResultPage = () => {
     <>
       <div id="background" />
       <video autoPlay loop muted id="background-video">
-        {/* <source src={BackgroundVideo} type="video/mp4" /> */}
+        <source src={BackgroundVideo} type="video/mp4" />
       </video>
       <div id="flex-total-container">
         <div id="flex-top-container">

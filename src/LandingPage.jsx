@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import BackgroundVideo from "./assets/AdobeStock_506762823.mov";
+import BackgroundVideo from "./assets/AdobeStock_506762823.mov";
 import axios from "axios";
 import "./LandingPage.css";
-//  For Learning Git. Delete Later
+
 const LandingPage = () => {
   useEffect(() => {
     document.title = "Weather App";
@@ -30,9 +30,15 @@ const LandingPage = () => {
 
   return (
     <div className="background-Landing">
-      <video autoPlay loop muted className="video-Landing">
-        {/* <source src={BackgroundVideo} type="video/mp4" /> */}
-      </video>
+      <video
+        autoPlay
+        loop
+        muted
+        className="video-Landing"
+        src={BackgroundVideo}
+        type="video/mp4"
+      />
+
       <div id="flex-box-Landing">
         <div className="weather-app-container-Landing">
           <h1>Weather App</h1>
