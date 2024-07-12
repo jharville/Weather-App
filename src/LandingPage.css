@@ -30,6 +30,7 @@
 
 .weather-app-container-Landing {
   text-align: center;
+  color: #d5dfe1;
   max-width: 350px;
   background: linear-gradient(135deg, #014b30, rgb(5, 3, 162));
   width: 100%;

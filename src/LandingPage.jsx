@@ -8,6 +8,7 @@ const LandingPage = () => {
   useEffect(() => {
     document.title = "Weather App";
   }, []);
+  //^ this names the the tab
 
   const [cityInput, setCityInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");

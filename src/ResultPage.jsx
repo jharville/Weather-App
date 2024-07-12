@@ -45,13 +45,13 @@ const ResultPage = () => {
     }
   };
 
-  const capitalizeCityName = (cityName) => {
-    return cityName
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
+  // const capitalizeCityName = (cityName) => {
+  //   return cityName
+  //     .toLowerCase()
+  //     .split(" ")
+  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+  //     .join(" ");
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,74 +65,78 @@ const ResultPage = () => {
       <video autoPlay loop muted id="background-video">
         <source src={BackgroundVideo} type="video/mp4" />
       </video>
-      <div id="flex-total-container">
-        <div id="flex-top-container">
-          <div id="temp-city-conditon-box-container">
-            <div id="temp-city-conditon-box">
-              <form id="form" onSubmit={handleSubmit}>
-                <input
-                  id="input-City"
-                  type="text"
-                  value={cityInput}
-                  onChange={(e) => setCityInput(e.target.value)}
-                  placeholder="Enter city name"
-                />
-                <button id="get-weather-button" type="submit">
-                  <p>Get</p>
-                  <p>Weather</p>
-                </button>
-              </form>
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>Condition:</p>
-                  <p>City: {capitalizeCityName(city)}</p>
-                  <p>Temperature: {weather.hourly.temperature_2m[0]} °F </p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div id="humidity-uv-box-container">
-            <div id="humidity-uv-box">
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>UV:{} </p>
-                  <p>Humidity: {} </p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div id="map-box-container">
-            <div id="map-box">
-              <div id="form-container"></div>
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>City: {capitalizeCityName(city)}</p>
-                  <p>MAP</p>
-                </div>
-              )}
-            </div>
-          </div>
+      <div id="whole-page-container-plus-sidebar">
+        <div id="side-bar">
+          <p>balls</p>
         </div>
-        <div id="flex-bottom-container">
-          <div id="forcast-box">
-            {error && <p>{error}</p>}
-            {weather && (
-              <div>
-                <p>Forcast: {} </p>
-              </div>
-            )}
-          </div>
-          <div id="summary-box-container">
-            <div id="summary-box">
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>Summary: {} </p>
+        <div id="flex-grid-without-sidebar">
+          <div id="parent-of-flex-grid-container">
+            <div id="flex-grid-containers-total">
+              <div id="flex-grid-top-row">
+                <div id="temp-city-conditon-box">
+                  <form id="form" onSubmit={handleSubmit}>
+                    <input
+                      id="input-City"
+                      type="text"
+                      value={cityInput}
+                      onChange={(e) => setCityInput(e.target.value)}
+                      placeholder="Enter city name"
+                    />
+                  </form>
+                  <form>
+                    <button id="get-weather-button" type="submit">
+                      <p>Get</p>
+                      <p>Weather</p>
+                    </button>
+                  </form>
+                  {error && <p>{error}</p>}
+                  {weather && (
+                    <div>
+                      <p>Condition:</p>
+                      <p className="capitalize">City: {city}</p>
+                      <p>Temperature: {weather.hourly.temperature_2m[0]} °F </p>
+                    </div>
+                  )}
                 </div>
-              )}
+
+                <div id="map-box">
+                  <div id="form-container"></div>
+                  {error && <p>{error}</p>}
+                  {weather && (
+                    <div>
+                      <p className="capitalize">City: {city}</p>
+                      <p>MAP</p>
+                    </div>
+                  )}
+                </div>
+                <div id="humidity-uv-box">
+                  {error && <p>{error}</p>}
+                  {weather && (
+                    <div>
+                      <p>UV:{} </p>
+                      <p>Humidity: {} </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div id="flex-grid-bottom-row">
+                <div id="forcast-box">
+                  {error && <p>{error}</p>}
+                  {weather && (
+                    <div>
+                      <p>Forcast: {} </p>
+                    </div>
+                  )}
+                </div>
+                <div id="summary-box">
+                  {error && <p>{error}</p>}
+                  {weather && (
+                    <div>
+                      <p>Summary: {} </p>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
