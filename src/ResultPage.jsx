@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
 import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
+import searchIcon from "./assets/WeatherIcons/searchIcon.png";
 
 const ResultPage = () => {
   const location = useLocation();
@@ -25,6 +26,11 @@ const ResultPage = () => {
   const fetchWeather = async (city) => {
     console.log("City", city);
     try {
+      if (!city.trim()) {
+        setError("Please Enter a City");
+        setWeather(null);
+        return;
+      }
       const geographicalCoordinatesResponse = await axios.get(
         `https://nominatim.openstreetmap.org/search?q=${city}&format=json&limit=1`
       );
@@ -32,6 +38,9 @@ const ResultPage = () => {
         throw new Error("City Not Found");
       }
       const { lat, lon } = geographicalCoordinatesResponse.data[0];
+      if (lat === 0 && lon === 0) {
+        throw new Error("City Not Found");
+      }
       const weatherResponse = await axios.get(
         `https://api.open-meteo.com/v1/gfs?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&temperature_unit=fahrenheit`
       );
@@ -40,18 +49,10 @@ const ResultPage = () => {
       setError(null);
     } catch (err) {
       console.error("Error fetching Data", err);
-      setError("City Not Found");
+      setError(err.message);
       setWeather(null);
     }
   };
-
-  // const capitalizeCityName = (cityName) => {
-  //   return cityName
-  //     .toLowerCase()
-  //     .split(" ")
-  //     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-  //     .join(" ");
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -61,78 +62,87 @@ const ResultPage = () => {
 
   return (
     <>
-      <div id="background" />
       <video autoPlay loop muted id="background-video">
         <source src={BackgroundVideo} type="video/mp4" />
       </video>
       <div id="whole-page-container-plus-sidebar">
         <div id="side-bar">
-          <p>balls</p>
+          <p id="side-bar-icon">Today</p>
+          <p id="side-bar-icon">Hourly</p>
+          <p id="side-bar-icon">Weekly</p>
+          <p id="side-bar-icon">Monthly</p>
         </div>
         <div id="flex-grid-without-sidebar">
           <div id="parent-of-flex-grid-container">
             <div id="flex-grid-containers-total">
-              <div id="flex-grid-top-row">
-                <div id="temp-city-conditon-box">
-                  <form id="form" onSubmit={handleSubmit}>
+              <div id="flex-grid-row-w-search-bar">
+                <div id="search-bar-container">
+                  <form
+                    id="search-city-text-field-container"
+                    onSubmit={handleSubmit}
+                  >
                     <input
-                      id="input-City"
+                      id="search-city-text-field"
                       type="text"
                       value={cityInput}
                       onChange={(e) => setCityInput(e.target.value)}
-                      placeholder="Enter city name"
+                      placeholder="Search City"
                     />
-                  </form>
-                  <form>
-                    <button id="get-weather-button" type="submit">
-                      <p>Get</p>
-                      <p>Weather</p>
+                    <button id="search-icon-button" type="submit">
+                      <img
+                        src={searchIcon}
+                        alt="Search"
+                        style={{ height: "20px", width: "20px" }}
+                      />
                     </button>
                   </form>
+                </div>
+                <div id="map-uv-container">
+                  <div id="map-box-invisible"></div>
+                  <div id="humidity-uv-box-invisible"></div>
+                </div>
+              </div>
+              <div id="flex-grid-row">
+                <div id="current-weather-box">
                   {error && <p>{error}</p>}
                   {weather && (
                     <div>
-                      <p>Condition:</p>
-                      <p className="capitalize">City: {city}</p>
+                      <p>Current Weather:</p>
+                      <p className="capitalize-text">City: {city}</p>
                       <p>Temperature: {weather.hourly.temperature_2m[0]} °F </p>
                     </div>
                   )}
                 </div>
-
-                <div id="map-box">
-                  <div id="form-container"></div>
-                  {error && <p>{error}</p>}
-                  {weather && (
-                    <div>
-                      <p className="capitalize">City: {city}</p>
-                      <p>MAP</p>
-                    </div>
-                  )}
-                </div>
-                <div id="humidity-uv-box">
-                  {error && <p>{error}</p>}
-                  {weather && (
-                    <div>
-                      <p>UV:{} </p>
-                      <p>Humidity: {} </p>
-                    </div>
-                  )}
+                <div id="map-uv-container">
+                  <div id="map-box">
+                    {weather && (
+                      <div>
+                        <p>MAP</p>
+                      </div>
+                    )}
+                  </div>
+                  <div id="humidity-uv-box">
+                    {weather && (
+                      <div>
+                        <p className="capitalize-text">Humidity: {city} </p>
+                        <p>UV:{} </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-              <div id="flex-grid-bottom-row">
+              <div id="flex-grid-row">
                 <div id="forcast-box">
-                  {error && <p>{error}</p>}
                   {weather && (
                     <div>
-                      <p>Forcast: {} </p>
+                      <p>Forcast</p>
                     </div>
                   )}
                 </div>
                 <div id="summary-box">
-                  {error && <p>{error}</p>}
                   {weather && (
                     <div>
-                      <p>Summary: {} </p>
+                      <p>Summary</p>
                     </div>
                   )}
                 </div>
