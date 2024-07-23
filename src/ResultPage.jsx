@@ -72,7 +72,7 @@ const ResultPage = () => {
           <p id="side-bar-icon">Weekly</p>
           <p id="side-bar-icon">Monthly</p>
         </div>
-        <div id="flex-grid-without-sidebar">
+        <div id="whole-page-container-without-sidebar">
           <div id="parent-of-flex-grid-container">
             <div id="flex-grid-containers-total">
               <div id="flex-grid-row-w-search-bar">
