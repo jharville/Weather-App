@@ -12,9 +12,18 @@
 
 #whole-page-container-plus-sidebar {
   display: flex;
-  /* adjust padding to shrink/grow contents */
   justify-content: center;
-  padding: 200px;
+
+  padding-top: 40px;
+  height: 80vh;
+  /* background-color: #000000; */
+}
+
+@media (max-height: 750px) {
+  #whole-page-container-plus-sidebar {
+    /* height: 100vh; */
+    padding-top: 0px;
+  }
 }
 
 #whole-page-container-without-sidebar {
@@ -23,11 +32,12 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  /* adjust padding to shrink/grow contents */
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #78aacdc0;
+  background: linear-gradient(#3f7eafe2, #cce7fffa);
   padding: 30px 30px 30px 30px;
+  max-width: 1400px;
+  min-height: 670px;
 }
 
 #side-bar {
@@ -37,9 +47,10 @@
   gap: 25px;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  background-color: #276da2f4;
+  background-color: #276da2fe;
   padding-top: 80px;
-  width: 60px;
+  width: 80px;
+  min-height: 650px;
   font-size: 0.5em;
 }
 
@@ -60,14 +71,13 @@
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  background-color: transparent;
+  /* background-color: black; */
 }
 
 #flex-grid-row-w-search-bar {
   display: flex;
   flex: 1;
   gap: 10px;
-  /* min-height: 4%; */
   background-color: transparent;
   height: 30px;
 }
@@ -94,7 +104,7 @@
   background-color: #6a6f8d;
   padding: 20px;
   min-width: 200px;
-  max-width: 250px;
+  max-width: 350px;
   text-align: center;
 }
 
@@ -110,8 +120,8 @@
   border-radius: 20px;
   background-color: #0d658e;
   padding: 20px;
-  min-width: 200px;
-  max-width: 250px;
+  min-width: 244.42px;
+  max-width: 350px;
   text-align: center;
 }
 
@@ -127,7 +137,7 @@
   border-radius: 20px;
   background-color: #02137e;
   padding: 20px;
-  min-width: 510px;
+  min-width: 708.23px;
   max-width: 1100px;
   text-align: center;
 }
@@ -151,21 +161,9 @@
   border-radius: 20px;
   background-color: #36057b;
   padding: 20px;
-  min-width: 300px;
-  max-width: 687px;
+  min-width: 500px;
+  max-width: 700px;
   text-align: center;
-}
-
-#map-box-invisible {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: transparent;
-  padding: 20px;
-  min-width: 400px;
-  max-width: 687px;
-  height: 30px;
 }
 
 #humidity-uv-box {
@@ -180,40 +178,64 @@
   border-radius: 20px;
   background-color: #514141;
   padding: 20px;
-  min-width: 100px;
-  max-width: 170px;
+  min-width: 150px;
+  max-width: 350px;
   text-align: center;
+}
+
+#map-uv-container-invisible {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 10px;
+  background-color: transparent;
+  min-width: 708.23px;
+  max-width: 1100px;
+}
+
+/* #map-box-invisible {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  background-color: purple;
+  padding: 20px;
+  height: 30px;
 }
 
 #humidity-uv-box-invisible {
   display: flex;
-  flex: 1;
+  flex-grow: 1;
   flex-direction: column;
   box-sizing: border-box;
-  background-color: transparent;
+  background-color: rgb(128, 117, 0);
   padding: 20px;
-  min-width: 100px;
-  max-width: 170px;
-}
+  height: 30px;
+} */
 
 #search-bar-container {
   display: flex;
-  position: relative;
   flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   z-index: 2;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-sizing: border-box;
   border: 5px solid #000000;
-  border-color: #000000;
-  border-radius: 10px;
-  background-color: #276da2be;
+  border-color: #d7d3d3;
+  border-radius: 30px;
+  background-color: #276da291;
   padding: 20px;
-  min-width: 200px;
-  max-width: 250px;
+  /* min-width: 200px; */
+  max-width: 350px;
   height: 46px;
   text-align: center;
+}
+
+#search-bar-container:hover {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-color: #ffffff;
 }
 
 #search-city-text-field-container {
@@ -223,7 +245,7 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  padding-left: 40px;
+  /* padding-left: 40px; */
   text-align: left;
 }
 
@@ -234,32 +256,54 @@
   outline: none;
   border-color: transparent;
   background-color: transparent;
-  padding-left: 20px;
-  max-width: 200px;
+  /* padding-left: 20px; */
+  max-width: 150px;
   height: 30px;
-  color: #000000;
-  font-weight: 600;
-  font-size: 0.65em;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.75em;
+  text-align: center;
   text-transform: capitalize;
 }
 
 #search-city-text-field::placeholder {
-  color: #ffffffba;
+  color: #e0e0e0ba;
+}
+
+#search-city-text-field:-webkit-autofill {
+  -webkit-box-shadow: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffffff; /*changes autofill text color*/
+  caret-color: white;
+  font-size: 0.75em;
 }
 
 #search-icon-button {
   position: relative;
-  right: 235px;
+  left: 18px;
   align-items: center;
+  transform: scaleX(-1);
   transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
     box-shadow 0.3s ease-in-out;
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   border: #000000;
   background-color: transparent;
+  color: #d7d3d3;
   font-weight: 500;
   font-size: 0.5em;
   line-height: 30%;
   font-family: inherit;
+}
+
+#search-icon-button:hover {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.25s ease-in-out;
+  color: #ffffff;
+}
+
+#search-icon-button:disabled:hover {
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  color: #d7d3d3;
 }
 
 #form-container {
@@ -275,7 +319,7 @@
   text-transform: capitalize;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   #flex-grid-row,
   #flex-grid-row-w-search-bar,
   #map-uv-container {
@@ -283,6 +327,17 @@
     /* gap: 20px; */
   }
 }
+
+#error-message-result {
+  padding-bottom: 25px;
+  color: rgb(175, 2, 2);
+  font-size: 1em;
+  font-family: fantasy;
+  text-align: center;
+}
+
+/* #search-bar-container:focus {
+} */
 
 /* justify-content: {
   flex-start: Items align to the left side of the container.

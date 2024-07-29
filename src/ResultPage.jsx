@@ -1,38 +1,38 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
 import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
-import searchIcon from "./assets/WeatherIcons/searchIcon.png";
+import { FaSearch } from "react-icons/fa";
 
 const ResultPage = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const city = queryParams.get("city");
+  const [searchParams, setSearchParams] = useSearchParams(); // Manages URL query parameters
+  const landingCityValue = searchParams.get("city"); // Retrieves the 'city' value from URL params
+
+  const [newCity, setNewCity] = useState(landingCityValue || ""); // State for the city name to fetch weather for
+  const [userTextInput, setUserTextInput] = useState(""); // State for the user input from the search field
+  const [weather, setWeather] = useState(null); // State for storing the weather data fetched from the API
+  const [error, setError] = useState(null); // Self explanatory
 
   useEffect(() => {
     document.title = "Weather App";
-    if (city) {
-      fetchWeather(city);
+    if (newCity) {
+      fetchWeather(newCity);
     }
-  }, [city]);
+  }, [newCity]);
 
-  // #region UseStates
-  const [cityInput, setCityInput] = useState("");
-  const [weather, setWeather] = useState(null);
-  const [error, setError] = useState(null);
-  // #endregion
-
-  const fetchWeather = async (city) => {
-    console.log("City", city);
+  const fetchWeather = async (cityName) => {
+    //Should make a custom hook for this logic
+    console.log("City", cityName);
     try {
-      if (!city.trim()) {
+      if (!cityName.trim()) {
         setError("Please Enter a City");
         setWeather(null);
         return;
       }
       const geographicalCoordinatesResponse = await axios.get(
-        `https://nominatim.openstreetmap.org/search?q=${city}&format=json&limit=1`
+        `https://nominatim.openstreetmap.org/search?q=${cityName}&format=json&limit=1`
       );
       if (geographicalCoordinatesResponse.data.length === 0) {
         throw new Error("City Not Found");
@@ -42,7 +42,7 @@ const ResultPage = () => {
         throw new Error("City Not Found");
       }
       const weatherResponse = await axios.get(
-        `https://api.open-meteo.com/v1/gfs?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&temperature_unit=fahrenheit`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&temperature_unit=fahrenheit`
       );
       console.log(weatherResponse.data);
       setWeather(weatherResponse.data);
@@ -56,8 +56,10 @@ const ResultPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Fetching weather for", cityInput);
-    fetchWeather(cityInput);
+    console.log("Fetching weather for", userTextInput);
+    setSearchParams({ city: userTextInput });
+    setNewCity(userTextInput); // Updates city state with input value
+    setUserTextInput(""); // this Clears the input field
   };
 
   return (
@@ -82,69 +84,75 @@ const ResultPage = () => {
                     onSubmit={handleSubmit}
                   >
                     <input
-                      id="search-city-text-field"
+                      id="search-city-text-field" //FUCK YOU
                       type="text"
-                      value={cityInput}
-                      onChange={(e) => setCityInput(e.target.value)}
+                      value={userTextInput}
+                      onChange={(e) => setUserTextInput(e.target.value)}
                       placeholder="Search City"
                     />
-                    <button id="search-icon-button" type="submit">
-                      <img
-                        src={searchIcon}
+                    <button
+                      id="search-icon-button"
+                      type="submit"
+                      disabled={!userTextInput.trim()}
+                    >
+                      <FaSearch
                         alt="Search"
                         style={{ height: "20px", width: "20px" }}
                       />
                     </button>
                   </form>
                 </div>
-                <div id="map-uv-container">
-                  <div id="map-box-invisible"></div>
-                  <div id="humidity-uv-box-invisible"></div>
-                </div>
+                <div id="map-uv-container-invisible"></div>
               </div>
               <div id="flex-grid-row">
                 <div id="current-weather-box">
-                  {error && <p>{error}</p>}
-                  {weather && (
+                  {error && <p id="error-message-result">{error}</p>}
+                  {!error && (
                     <div>
                       <p>Current Weather:</p>
-                      <p className="capitalize-text">City: {city}</p>
-                      <p>Temperature: {weather.hourly.temperature_2m[0]} °F </p>
+                      <p className="capitalize-text">City: {newCity || "-"}</p>
+                      <p>
+                        Temperature: {weather?.current?.temperature_2m || "-"}{" "}
+                        °F
+                      </p>
                     </div>
                   )}
                 </div>
                 <div id="map-uv-container">
                   <div id="map-box">
-                    {weather && (
-                      <div>
-                        <p>MAP</p>
-                      </div>
-                    )}
+                    <div>
+                      <p>
+                        MAP: {}
+                        {weather?.current?.temperature_2m || "-"}
+                      </p>
+                    </div>
                   </div>
                   <div id="humidity-uv-box">
-                    {weather && (
+                    <div>
                       <div>
-                        <p className="capitalize-text">Humidity: {city} </p>
-                        <p>UV:{} </p>
+                        <p>Humidity: {}</p>
+                        <p>
+                          UV Index: {weather?.current?.temperature_2m || "-"}{" "}
+                        </p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
               <div id="flex-grid-row">
                 <div id="forcast-box">
-                  {weather && (
-                    <div>
-                      <p>Forcast</p>
-                    </div>
-                  )}
+                  <div>
+                    <p>Forcast:</p>
+                    <p>Weekly: {weather?.current?.temperature_2m || "-"}</p>
+                  </div>
                 </div>
                 <div id="summary-box">
-                  {weather && (
-                    <div>
-                      <p>Summary</p>
-                    </div>
-                  )}
+                  <div>
+                    <p>Summary:</p>
+                    <p>
+                      Daily Forcast: {weather?.current?.temperature_2m || "-"}{" "}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
