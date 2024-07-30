@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
 import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
 import { FaSearch } from "react-icons/fa";
 
 const ResultPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams(); // Manages URL query parameters
-  const landingCityValue = searchParams.get("city"); // Retrieves the 'city' value from URL params
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [newCity, setNewCity] = useState(landingCityValue || ""); // State for the city name to fetch weather for
+  const [newCity, setNewCity] = useState(searchParams.get("city") || ""); //sets initial state of newCity as the city entered on landingPage
   const [userTextInput, setUserTextInput] = useState(""); // State for the user input from the search field
   const [weather, setWeather] = useState(null); // State for storing the weather data fetched from the API
-  const [error, setError] = useState(null); // Self explanatory
+  const [error, setError] = useState(null); // State for managing error messages
 
+  // Disable search button if input is empty or whitespace
+  const isSearchDisabled = !userTextInput.trim();
+
+  // Fetch weather data whenever newCity changes
   useEffect(() => {
     document.title = "Weather App";
     if (newCity) {
@@ -22,9 +24,13 @@ const ResultPage = () => {
     }
   }, [newCity]);
 
+  // Handle input changes and update userTextInput state
+  const handleInputChange = useCallback((e) => {
+    setUserTextInput(e.target.value);
+  }, []);
+
+  // Fetch weather data for a given city
   const fetchWeather = async (cityName) => {
-    //Should make a custom hook for this logic
-    console.log("City", cityName);
     try {
       if (!cityName.trim()) {
         setError("Please Enter a City");
@@ -44,22 +50,21 @@ const ResultPage = () => {
       const weatherResponse = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&temperature_unit=fahrenheit`
       );
-      console.log(weatherResponse.data);
       setWeather(weatherResponse.data);
       setError(null);
     } catch (err) {
-      console.error("Error fetching Data", err);
       setError(err.message);
       setWeather(null);
     }
   };
 
+  // Handle form submission to fetch weather data
   const handleSubmit = (e) => {
+    console.log(newCity);
     e.preventDefault();
-    console.log("Fetching weather for", userTextInput);
     setSearchParams({ city: userTextInput });
-    setNewCity(userTextInput); // Updates city state with input value
-    setUserTextInput(""); // this Clears the input field
+    setNewCity(userTextInput); // Update newCity state with input value
+    setUserTextInput(""); // Clear the input field
   };
 
   return (
@@ -84,21 +89,18 @@ const ResultPage = () => {
                     onSubmit={handleSubmit}
                   >
                     <input
-                      id="search-city-text-field" //FUCK YOU
+                      id="search-city-text-field"
                       type="text"
                       value={userTextInput}
-                      onChange={(e) => setUserTextInput(e.target.value)}
+                      onChange={handleInputChange}
                       placeholder="Search City"
                     />
                     <button
                       id="search-icon-button"
                       type="submit"
-                      disabled={!userTextInput.trim()}
+                      disabled={isSearchDisabled}
                     >
-                      <FaSearch
-                        alt="Search"
-                        style={{ height: "20px", width: "20px" }}
-                      />
+                      <FaSearch id="search-icon-button-sizing" alt="Search" />
                     </button>
                   </form>
                 </div>
@@ -106,8 +108,9 @@ const ResultPage = () => {
               </div>
               <div id="flex-grid-row">
                 <div id="current-weather-box">
-                  {error && <p id="error-message-result">{error}</p>}
-                  {!error && (
+                  {error ? (
+                    <p id="error-message-result">{error}</p>
+                  ) : (
                     <div>
                       <p>Current Weather:</p>
                       <p className="capitalize-text">City: {newCity || "-"}</p>

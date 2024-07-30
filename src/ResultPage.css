@@ -13,15 +13,12 @@
 #whole-page-container-plus-sidebar {
   display: flex;
   justify-content: center;
-
   padding-top: 40px;
   height: 80vh;
-  /* background-color: #000000; */
 }
 
 @media (max-height: 750px) {
   #whole-page-container-plus-sidebar {
-    /* height: 100vh; */
     padding-top: 0px;
   }
 }
@@ -71,7 +68,6 @@
   flex: 1;
   flex-direction: column;
   gap: 10px;
-  /* background-color: black; */
 }
 
 #flex-grid-row-w-search-bar {
@@ -193,26 +189,6 @@
   max-width: 1100px;
 }
 
-/* #map-box-invisible {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: purple;
-  padding: 20px;
-  height: 30px;
-}
-
-#humidity-uv-box-invisible {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-color: rgb(128, 117, 0);
-  padding: 20px;
-  height: 30px;
-} */
-
 #search-bar-container {
   display: flex;
   flex: 1;
@@ -227,7 +203,6 @@
   border-radius: 30px;
   background-color: #276da291;
   padding: 20px;
-  /* min-width: 200px; */
   max-width: 350px;
   height: 46px;
   text-align: center;
@@ -245,7 +220,6 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  /* padding-left: 40px; */
   text-align: left;
 }
 
@@ -256,13 +230,12 @@
   outline: none;
   border-color: transparent;
   background-color: transparent;
-  /* padding-left: 20px; */
   max-width: 150px;
   height: 30px;
   color: #ffffff;
   font-weight: 500;
   font-size: 0.75em;
-  text-align: center;
+  text-align: left;
   text-transform: capitalize;
 }
 
@@ -302,8 +275,13 @@
 }
 
 #search-icon-button:disabled:hover {
-  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  cursor: not-allowed;
   color: #d7d3d3;
+}
+
+#search-icon-button-sizing {
+  width: 20px;
+  height: 20px;
 }
 
 #form-container {
@@ -324,7 +302,6 @@
   #flex-grid-row-w-search-bar,
   #map-uv-container {
     flex-direction: column;
-    /* gap: 20px; */
   }
 }
 
@@ -335,9 +312,6 @@
   font-family: fantasy;
   text-align: center;
 }
-
-/* #search-bar-container:focus {
-} */
 
 /* justify-content: {
   flex-start: Items align to the left side of the container.
