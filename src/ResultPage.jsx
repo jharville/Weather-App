@@ -1,9 +1,10 @@
 import { useEffect, useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
 import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaHome } from "react-icons/fa";
 
 const ResultPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,6 +13,8 @@ const ResultPage = () => {
   const [userTextInput, setUserTextInput] = useState(""); // State for the user input from the search field
   const [weather, setWeather] = useState(null); // State for storing the weather data fetched from the API
   const [error, setError] = useState(null); // State for managing error messages
+
+  const navigate = useNavigate();
 
   // Disable search button if input is empty or whitespace
   const isSearchDisabled = !userTextInput.trim();
@@ -67,6 +70,10 @@ const ResultPage = () => {
     setUserTextInput(""); // Clear the input field
   };
 
+  const handleHomeClick = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <video autoPlay loop muted id="background-video">
@@ -74,6 +81,9 @@ const ResultPage = () => {
       </video>
       <div id="whole-page-container-plus-sidebar">
         <div id="side-bar">
+          <button id="side-bar-home-icon" onClick={handleHomeClick}>
+            <FaHome />
+          </button>
           <p id="side-bar-icon">Today</p>
           <p id="side-bar-icon">Hourly</p>
           <p id="side-bar-icon">Weekly</p>
