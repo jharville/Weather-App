@@ -8,6 +8,7 @@ const LandingPage = () => {
   useEffect(() => {
     document.title = "Weather App";
   }, []);
+  //^ this names the the tab
 
   const [cityInput, setCityInput] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -22,7 +23,7 @@ const LandingPage = () => {
       if (geographicalCoordinatesResponse.data.length === 0) {
         throw new Error();
       } else cityInput;
-      navigate(`/ResultPage?city=${encodeURIComponent(cityInput)}`);
+      navigate(`/ResultPage?city=${encodeURIComponent(cityInput)}`); //Determines the url navigated to along with city entered.
     } catch {
       setErrorMessage("Please Enter A Valid City");
     }
@@ -38,24 +39,25 @@ const LandingPage = () => {
         src={BackgroundVideo}
         type="video/mp4"
       />
-
       <div id="flex-box-Landing">
         <div className="weather-app-container-Landing">
-          <h1>Weather App</h1>
-          <form className="form-and-boxes-container" onSubmit={handleSubmit}>
+          <div id="app-title">
+            <h1>Weather Getter</h1>
+          </div>
+          <form id="form-and-boxes-container" onSubmit={handleSubmit}>
             <input
-              className="enter-City-Landing"
+              id="enter-City-Name-Field"
               type="text"
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
               placeholder="Enter City Name"
             />
-            <button className="get-weather-button-Landing" type="submit">
-              Get Weather
+            <button id="get-weather-button" type="submit">
+              <p>Get Weather</p>
             </button>
           </form>
           <div>
-            {errorMessage && <h1 id="error-message">{errorMessage}</h1>}
+            {errorMessage && <h1 id="error-message-landing">{errorMessage}</h1>}
           </div>
         </div>
       </div>

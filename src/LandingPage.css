@@ -1,93 +1,139 @@
 .background-Landing {
-  background-color: rgb(27, 25, 25);
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  display: flex;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
   justify-content: center;
+  background-color: rgb(27, 25, 25);
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .video-Landing {
   position: fixed;
-  z-index: -1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: -1;
   width: 100vw;
   height: 100vh;
   object-fit: cover;
 }
 
 #flex-box-Landing {
+  display: flex;
   align-self: center;
+  max-width: 524px;
 }
 
 .weather-app-container-Landing {
-  text-align: center;
-  max-width: 350px;
-  background: linear-gradient(135deg, #014b30, rgb(5, 3, 162));
-  width: 100%;
-  padding: 0px 20px 30px;
-  box-sizing: border-box;
-  border: solid 8px rgb(48, 47, 47);
-  border-radius: 20px;
-}
-
-.form-and-boxes-container {
   display: flex;
+  flex: 1;
+  flex-direction: column;
   justify-content: center;
-  gap: 15px;
-}
-
-.enter-City-Landing {
-  height: 65px;
-  width: 150px;
-  font-size: 0.55em;
-  text-align: center;
+  align-items: center;
+  gap: 50px;
+  box-sizing: border-box;
+  border: solid 8px rgb(255, 255, 255);
+  border-radius: 20px;
+  background: linear-gradient(#3274a6, #768087);
+  padding: 30px;
+  padding-top: 80px;
+  width: 600px;
+  height: 600px;
   color: #ffffff;
-  border-radius: 10px;
-  background-color: #212020;
-  border: 5px solid teal;
-  transition: border-color 0.3s ease-in-out, box-shadow 0.25s ease-in-out;
-}
-
-.get-weather-button-Landing {
-  height: 77px;
-  width: 120px;
-  border-radius: 10px;
-  border: 5px solid teal;
-  font-size: 0.6em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #fff;
-  background-color: #212020;
-  cursor: pointer;
-  transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out;
-  padding: 0;
-}
-
-.get-weather-button-Landing:hover,
-.get-weather-button-Landing:focus {
-  text-shadow: 0 0 10px rgb(6, 201, 255);
-  border-color: rgb(1, 175, 175);
-}
-
-.enter-City-Landing:hover,
-.enter-City-Landing:focus {
-  border-color: #d5dfe1;
-  /* box-shadow: 0 8px 816px rgba(0, 0, 0, 0.3); */
-}
-
-#error-message {
-  padding-top: 15px;
   text-align: center;
-  font-size: 0.5em;
+}
+
+#app-title {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 200px;
+  font-size: 1.25em;
+}
+
+#form-and-boxes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+#enter-City-Name-Field {
+  display: flex;
+  flex: 1;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 5px solid rgb(192, 192, 192);
+  border-radius: 30px;
+  background-color: #212020;
+  min-width: 400px;
+  height: 65px;
+  min-height: 50px;
+  color: #ffffff;
+  font-size: 0.75em;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+#enter-City-Name-Field::placeholder {
+  color: #c5c4c4ba;
+}
+
+#enter-City-Name-Field:hover {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-color: #ffffff;
+}
+
+#enter-City-Name-Field:focus {
+  outline: none;
+}
+
+#enter-City-Name-Field:-webkit-autofill {
+  -webkit-box-shadow: transparent;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffffff; /*changes autofill text color*/
+  caret-color: white;
+  font-size: 0.75em;
+}
+
+#get-weather-button {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  transition: text-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+  border: 5px solid rgb(2, 85, 127);
+  border-radius: 20px;
+  background-color: #212020;
+  padding: 10px;
+  min-width: 200px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.75em;
+  font-family: inherit;
+}
+
+#get-weather-button:hover,
+#get-weather-button:focus {
+  border: 5px solid;
+  border-color: rgb(3, 137, 204);
+  text-shadow: 0 0 10px rgb(6, 201, 255);
+}
+
+#error-message-landing {
+  padding-bottom: 25px;
   color: red;
+  font-size: 0.85em;
+  font-family: fantasy;
+  text-align: center;
 }

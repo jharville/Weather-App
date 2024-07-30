@@ -1,138 +1,163 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useCallback, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
 import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
+import { FaSearch } from "react-icons/fa";
 
 const ResultPage = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const city = queryParams.get("city");
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  const [newCity, setNewCity] = useState(searchParams.get("city") || ""); //sets initial state of newCity as the city entered on landingPage
+  const [userTextInput, setUserTextInput] = useState(""); // State for the user input from the search field
+  const [weather, setWeather] = useState(null); // State for storing the weather data fetched from the API
+  const [error, setError] = useState(null); // State for managing error messages
+
+  // Disable search button if input is empty or whitespace
+  const isSearchDisabled = !userTextInput.trim();
+
+  // Fetch weather data whenever newCity changes
   useEffect(() => {
     document.title = "Weather App";
-    if (city) {
-      fetchWeather(city);
+    if (newCity) {
+      fetchWeather(newCity);
     }
-  }, [city]);
+  }, [newCity]);
 
-  // #region UseStates
-  const [cityInput, setCityInput] = useState("");
-  const [weather, setWeather] = useState(null);
-  const [error, setError] = useState(null);
-  // #endregion
+  // Handle input changes and update userTextInput state
+  const handleInputChange = useCallback((e) => {
+    setUserTextInput(e.target.value);
+  }, []);
 
-  const fetchWeather = async (city) => {
-    console.log("City", city);
+  // Fetch weather data for a given city
+  const fetchWeather = async (cityName) => {
     try {
+      if (!cityName.trim()) {
+        setError("Please Enter a City");
+        setWeather(null);
+        return;
+      }
       const geographicalCoordinatesResponse = await axios.get(
-        `https://nominatim.openstreetmap.org/search?q=${city}&format=json&limit=1`
+        `https://nominatim.openstreetmap.org/search?q=${cityName}&format=json&limit=1`
       );
       if (geographicalCoordinatesResponse.data.length === 0) {
         throw new Error("City Not Found");
       }
       const { lat, lon } = geographicalCoordinatesResponse.data[0];
+      if (lat === 0 && lon === 0) {
+        throw new Error("City Not Found");
+      }
       const weatherResponse = await axios.get(
-        `https://api.open-meteo.com/v1/gfs?latitude=${lat}&longitude=${lon}&hourly=temperature_2m&temperature_unit=fahrenheit`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&temperature_unit=fahrenheit`
       );
-      console.log(weatherResponse.data);
       setWeather(weatherResponse.data);
       setError(null);
     } catch (err) {
-      console.error("Error fetching Data", err);
-      setError("City Not Found");
+      setError(err.message);
       setWeather(null);
     }
   };
 
-  const capitalizeCityName = (cityName) => {
-    return cityName
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
-
+  // Handle form submission to fetch weather data
   const handleSubmit = (e) => {
+    console.log(newCity);
     e.preventDefault();
-    console.log("Fetching weather for", cityInput);
-    fetchWeather(cityInput);
+    setSearchParams({ city: userTextInput });
+    setNewCity(userTextInput); // Update newCity state with input value
+    setUserTextInput(""); // Clear the input field
   };
 
   return (
     <>
-      <div id="background" />
       <video autoPlay loop muted id="background-video">
         <source src={BackgroundVideo} type="video/mp4" />
       </video>
-      <div id="flex-total-container">
-        <div id="flex-top-container">
-          <div id="temp-city-conditon-box-container">
-            <div id="temp-city-conditon-box">
-              <form id="form" onSubmit={handleSubmit}>
-                <input
-                  id="input-City"
-                  type="text"
-                  value={cityInput}
-                  onChange={(e) => setCityInput(e.target.value)}
-                  placeholder="Enter city name"
-                />
-                <button id="get-weather-button" type="submit">
-                  <p>Get</p>
-                  <p>Weather</p>
-                </button>
-              </form>
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>Condition:</p>
-                  <p>City: {capitalizeCityName(city)}</p>
-                  <p>Temperature: {weather.hourly.temperature_2m[0]} °F </p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div id="humidity-uv-box-container">
-            <div id="humidity-uv-box">
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>UV:{} </p>
-                  <p>Humidity: {} </p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div id="map-box-container">
-            <div id="map-box">
-              <div id="form-container"></div>
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>City: {capitalizeCityName(city)}</p>
-                  <p>MAP</p>
-                </div>
-              )}
-            </div>
-          </div>
+      <div id="whole-page-container-plus-sidebar">
+        <div id="side-bar">
+          <p id="side-bar-icon">Today</p>
+          <p id="side-bar-icon">Hourly</p>
+          <p id="side-bar-icon">Weekly</p>
+          <p id="side-bar-icon">Monthly</p>
         </div>
-        <div id="flex-bottom-container">
-          <div id="forcast-box">
-            {error && <p>{error}</p>}
-            {weather && (
-              <div>
-                <p>Forcast: {} </p>
-              </div>
-            )}
-          </div>
-          <div id="summary-box-container">
-            <div id="summary-box">
-              {error && <p>{error}</p>}
-              {weather && (
-                <div>
-                  <p>Summary: {} </p>
+        <div id="whole-page-container-without-sidebar">
+          <div id="parent-of-flex-grid-container">
+            <div id="flex-grid-containers-total">
+              <div id="flex-grid-row-w-search-bar">
+                <div id="search-bar-container">
+                  <form
+                    id="search-city-text-field-container"
+                    onSubmit={handleSubmit}
+                  >
+                    <input
+                      id="search-city-text-field"
+                      type="text"
+                      value={userTextInput}
+                      onChange={handleInputChange}
+                      placeholder="Search City"
+                    />
+                    <button
+                      id="search-icon-button"
+                      type="submit"
+                      disabled={isSearchDisabled}
+                    >
+                      <FaSearch id="search-icon-button-sizing" alt="Search" />
+                    </button>
+                  </form>
                 </div>
-              )}
+                <div id="map-uv-container-invisible"></div>
+              </div>
+              <div id="flex-grid-row">
+                <div id="current-weather-box">
+                  {error ? (
+                    <p id="error-message-result">{error}</p>
+                  ) : (
+                    <div>
+                      <p>Current Weather:</p>
+                      <p className="capitalize-text">City: {newCity || "-"}</p>
+                      <p>
+                        Temperature: {weather?.current?.temperature_2m || "-"}{" "}
+                        °F
+                      </p>
+                    </div>
+                  )}
+                </div>
+                <div id="map-uv-container">
+                  <div id="map-box">
+                    <div>
+                      <p>
+                        MAP: {}
+                        {weather?.current?.temperature_2m || "-"}
+                      </p>
+                    </div>
+                  </div>
+                  <div id="humidity-uv-box">
+                    <div>
+                      <div>
+                        <p>Humidity: {}</p>
+                        <p>
+                          UV Index: {weather?.current?.temperature_2m || "-"}{" "}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="flex-grid-row">
+                <div id="forcast-box">
+                  <div>
+                    <p>Forcast:</p>
+                    <p>Weekly: {weather?.current?.temperature_2m || "-"}</p>
+                  </div>
+                </div>
+                <div id="summary-box">
+                  <div>
+                    <p>Summary:</p>
+                    <p>
+                      Daily Forcast: {weather?.current?.temperature_2m || "-"}{" "}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
