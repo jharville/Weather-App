@@ -1,15 +1,12 @@
 .background-Landing {
-  display: flex;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   justify-content: center;
+  z-index: -99;
   background-color: rgb(27, 25, 25);
-  font-weight: 400;
-  line-height: 1.5;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .video-Landing {
@@ -24,10 +21,23 @@
   object-fit: cover;
 }
 
+#entire-landing-page {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 1000px;
+
+  /* padding-top: 150px; */
+}
+
 #flex-box-Landing {
   display: flex;
-  align-self: center;
-  max-width: 524px;
+
+  justify-content: center; /* Center children vertically */
+  align-items: center; /* Center children horizontally */
+
+  max-width: 524px; /* Maximum width of the container */
 }
 
 .weather-app-container-Landing {
@@ -36,13 +46,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
   box-sizing: border-box;
   border: solid 8px rgb(255, 255, 255);
   border-radius: 20px;
   background: linear-gradient(#3274a6, #768087);
   padding: 30px;
   padding-top: 80px;
+  padding-bottom: 50px;
   width: 600px;
   height: 600px;
   color: #ffffff;
@@ -56,11 +67,14 @@
   justify-content: center;
   align-items: center;
   max-height: 200px;
-  font-size: 1.25em;
+  font-size: 2.5em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 #form-and-boxes-container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -71,14 +85,14 @@
   display: flex;
   flex: 1;
   transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 5px solid rgb(192, 192, 192);
+  border: 5px solid #bbb8b8;
   border-radius: 30px;
   background-color: #212020;
   min-width: 400px;
-  height: 65px;
-  min-height: 50px;
+  min-height: 55px;
+  /* max-height: 55px; */
   color: #ffffff;
-  font-size: 0.75em;
+  font-size: 1.8em;
   text-align: center;
   text-transform: capitalize;
 }
@@ -94,6 +108,7 @@
 
 #enter-City-Name-Field:focus {
   outline: none;
+  border-color: #ffffff;
 }
 
 #enter-City-Name-Field:-webkit-autofill {
@@ -102,30 +117,34 @@
   transition: background-color 5000s ease-in-out 0s;
   -webkit-text-fill-color: #ffffff; /*changes autofill text color*/
   caret-color: white;
-  font-size: 0.75em;
+  font-size: 1.8em;
 }
 
 #get-weather-button {
   display: flex;
   flex: 1;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   transition: text-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.3s ease-in-out;
   cursor: pointer;
-  border: 5px solid rgb(2, 85, 127);
+  border: 6px solid rgb(2, 85, 127);
   border-radius: 20px;
   background-color: #212020;
-  padding: 10px;
-  min-width: 200px;
+  padding: 20px;
+  /* min-width: 200px; */
+  max-height: 100px;
   color: #fff;
   font-weight: 500;
-  font-size: 0.75em;
-  font-family: inherit;
+  font-size: 2em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 #get-weather-button:hover,
 #get-weather-button:focus {
-  border: 5px solid;
+  border: 6px solid;
   border-color: rgb(3, 137, 204);
   text-shadow: 0 0 10px rgb(6, 201, 255);
 }
@@ -133,7 +152,7 @@
 #error-message-landing {
   padding-bottom: 25px;
   color: red;
-  font-size: 0.85em;
+  font-size: 2em;
   font-family: fantasy;
   text-align: center;
 }
