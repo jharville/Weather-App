@@ -5,12 +5,10 @@ import ResultPage from "./ResultPage.jsx";
 const WeatherApp = () => {
   return (
     <Router>
-      <h1>
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route path="/ResultPage" element={<ResultPage />} />
-        </Routes>
-      </h1>
+      <Routes>
+        <Route exact path="/" element={<LandingPage />} />
+        <Route path="/ResultPage" element={<ResultPage />} />
+      </Routes>
     </Router>
   );
 };
