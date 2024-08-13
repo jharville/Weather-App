@@ -3,9 +3,16 @@ import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ResultPage.css";
-import BackgroundVideo from "./assets/AdobeStock_712855701_Video_HD_Preview.mov";
-import { FaSearch, FaHome } from "react-icons/fa";
-
+import { WiDayCloudy } from "react-icons/wi";
+import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.mov";
+import { FaSearch, FaHome, FaSun } from "react-icons/fa";
+import "./ResultPageContents.css";
+import { FaWind } from "react-icons/fa6";
+import { WiRaindrop } from "react-icons/wi";
+import { CiCloudSun } from "react-icons/ci";
+import { WiDegrees } from "react-icons/wi";
+import { IoIosCloudy } from "react-icons/io";
+import { WiHumidity } from "react-icons/wi";
 const ResultPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -51,8 +58,9 @@ const ResultPage = () => {
         throw new Error("City Not Found");
       }
       const weatherResponse = await axios.get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m&temperature_unit=fahrenheit`
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,precipitation,rain,showers,snowfall,snow_depth,weather_code,pressure_msl,surface_pressure,cloud_cover,cloud_cover_low,cloud_cover_mid,cloud_cover_high,wind_speed_10m,wind_speed_80m,wind_speed_120m,wind_speed_180m,wind_direction_10m,wind_direction_80m,wind_direction_120m,wind_direction_180m,wind_gusts_10m,temperature_80m,temperature_120m,temperature_180m&daily=weather_code,sunrise,sunset,daylight_duration,sunshine_duration,uv_index_max,precipitation_sum,rain_sum,showers_sum,snowfall_sum&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto`
       );
+      console.log("WEATHER", weatherResponse.data);
       setWeather(weatherResponse.data);
       setError(null);
     } catch (err) {
@@ -73,6 +81,21 @@ const ResultPage = () => {
   const handleHomeClick = () => {
     navigate("/");
   };
+
+  const date = new Date(Date.now());
+
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  const minutesFormatted = minutes < 10 ? "0" + minutes : minutes;
+
+  const formattedTime = `${hours}:${minutesFormatted} ${ampm}`;
+
+  const weatherStatusLabel = getWeatherLabel(weather?.current?.weather_code);
+  // const weatherStatusLabel = getWeatherLabel(0);
 
   return (
     <>
@@ -119,20 +142,47 @@ const ResultPage = () => {
                 </div>
                 <div id="flex-grid-row">
                   <div id="current-weather-box">
-                    {error ? (
-                      <p id="error-message-result">{error}</p>
-                    ) : (
-                      <div>
-                        <p className="capitalize-text">
-                          City: {newCity || "-"}
-                        </p>
-                        <p>
-                          Temperature: {weather?.current?.temperature_2m || "-"}{" "}
-                          °F
-                        </p>
-                        <p>Current Weather:</p>
+                    <div id="current-weather-top-row-container">
+                      <p id="current-weather-header">{newCity}</p>
+                      <p id="current-time">{formattedTime}</p>
+                    </div>
+                    <div id="current-weather-middle-row-container">
+                      {getWeatherIcon(weatherStatusLabel)}
+                      <div id="current-weather-temp-container">
+                        <div>
+                          <h1 id="temp">
+                            {weather?.current?.temperature_2m?.toFixed(0)}
+                          </h1>
+                          <p id="current-weather-condition">
+                            {weatherStatusLabel}
+                          </p>
+                        </div>
+                        <div id="fern-row">
+                          <div id="fern-outer">
+                            <div id="fern-inner" />
+                          </div>
+                          <p id="fern-f">F</p>
+                        </div>
                       </div>
-                    )}
+                    </div>
+                    <div id="current-weather-bottom-row-container">
+                      <div id="bottom-current-box">
+                        <WiRaindrop size={30} color="white" />
+                        <p id="bottom-label">{weather?.current?.rain}</p>
+                      </div>
+                      <div id="bottom-current-box">
+                        <FaWind size={30} color="white" />
+                        <p id="bottom-label">
+                          {weather?.current?.wind_speed_10m} mph
+                        </p>
+                      </div>
+                      <div id="bottom-current-box">
+                        <WiHumidity size={30} color="white" />
+                        <p id="bottom-label">
+                          {weather?.current?.relative_humidity_2m}%
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   <div id="map-uv-container">
                     <div id="map-box">
@@ -181,3 +231,31 @@ const ResultPage = () => {
 };
 
 export default ResultPage;
+
+const weatherStatuses = {
+  clear: "clear",
+  partlyCloudy: "partly cloudy",
+};
+
+const WMOs = [
+  { WMOCodes: [0], label: weatherStatuses.clear },
+  { WMOCodes: [1, 2, 3], label: weatherStatuses.partlyCloudy },
+];
+
+const getWeatherLabel = (weatherCode) => {
+  const foundWMOObj = WMOs.find((wmoObj) =>
+    wmoObj.WMOCodes.includes(weatherCode)
+  );
+  return foundWMOObj?.label || "";
+};
+
+const getWeatherIcon = (status) => {
+  switch (status) {
+    case weatherStatuses.clear:
+      return <FaSun color="goldenrod" size={120} />;
+    case weatherStatuses.partlyCloudy:
+      return <WiDayCloudy color="white" size={90} />;
+    default:
+      return <FaSun color="goldenrod" size={120} />; // or return a default component if needed
+  }
+};

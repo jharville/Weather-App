@@ -1,0 +1,85 @@
+#current-weather-top-row-container {
+  /* background-color: "#ff6f8d"; */
+  /* width: 80px;
+  height: 80px; */
+}
+#current-weather-middle-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#current-weather-temp-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#current-weather-header {
+  color: white;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+#current-time {
+  color: white;
+  font-size: 1rem;
+}
+#current-weather-condition {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+
+#fern-row {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  /* align-items: center; */
+}
+
+#fern-f {
+  color: white;
+  font-size: 1rem;
+}
+
+#fern-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: -10px; */
+  border-radius: 8px;
+  background-color: white;
+  width: 8px;
+  height: 8px;
+}
+#fern-inner {
+  border-radius: 5px;
+  background-color: #6a6f8d;
+  width: 5px;
+  height: 5px;
+}
+
+#current-weather-bottom-row-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#temp {
+  color: white;
+  font-size: 5rem;
+}
+
+#bottom-current-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#bottom-label {
+  color: white;
+  font-size: 1rem;
+}

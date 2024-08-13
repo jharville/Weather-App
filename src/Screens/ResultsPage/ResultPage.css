@@ -2,6 +2,11 @@
   /* may need for later */
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #background-video {
   position: fixed;
   top: 0;
@@ -127,8 +132,9 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  /* align-items: center; */
   z-index: 2;
   box-sizing: border-box;
   border: 8px solid #000000;
@@ -139,8 +145,8 @@
   min-width: 200px;
   max-width: 350px;
   font-weight: 600;
-  font-size: 2em;
-  text-align: center;
+
+  /* text-align: center; */
 }
 
 #forcast-box {

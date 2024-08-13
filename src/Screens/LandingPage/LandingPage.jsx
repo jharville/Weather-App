@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BackgroundVideoCompressed from "./assets/Weather_App_Background_Video_Compressed.mp4";
+import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import axios from "axios";
 import "./LandingPage.css";
 
