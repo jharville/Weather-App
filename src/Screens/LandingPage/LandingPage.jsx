@@ -1,31 +1,39 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import axios from "axios";
+import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import "./LandingPage.css";
 
 const LandingPage = () => {
+  const [cityInput, setCityInput] = useState("");
+  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Weather App";
   }, []);
-  //^ this names the the tab
-
-  const [cityInput, setCityInput] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!cityInput.trim()) {
+        throw new Error("No city was entered");
+      }
       const geographicalCoordinatesResponse = await axios.get(
         `https://nominatim.openstreetmap.org/search?q=${cityInput}&format=json&limit=1`
       );
       if (geographicalCoordinatesResponse.data.length === 0) {
-        throw new Error();
-      } else cityInput;
-      navigate(`/ResultPage?city=${encodeURIComponent(cityInput)}`); //Determines the url navigated to along with city entered.
-    } catch {
-      setErrorMessage("Please Enter A Valid City");
+        throw new Error("Couldn't find a city");
+      }
+      console.log("No errors, proceeding to navigate...");
+      navigate(`/ResultPage?city=${encodeURIComponent(cityInput)}`);
+    } catch (error) {
+      console.error("Error:", error.message);
+      setUserErrorMessage(
+        error.message === "No city was entered"
+          ? "No City Was Entered"
+          : "Please Enter A Valid City"
+      );
     }
   };
 
@@ -60,8 +68,8 @@ const LandingPage = () => {
               </button>
             </form>
             <div>
-              {errorMessage && (
-                <h1 id="error-message-landing">{errorMessage}</h1>
+              {userErrorMessage && (
+                <h1 id="error-message-landing">{userErrorMessage}</h1>
               )}
             </div>
           </div>
