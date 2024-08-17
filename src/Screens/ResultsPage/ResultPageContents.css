@@ -1,8 +1,9 @@
-#current-weather-top-row-container {
-  /* background-color: "#ff6f8d"; */
-  /* width: 80px;
-  height: 80px; */
+#current-weather-box-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
+
 #current-weather-middle-row-container {
   display: flex;
   flex-direction: row;
@@ -17,18 +18,18 @@
 
 #current-weather-header {
   color: white;
-  font-size: 1.5rem;
+  font-size: 2.5em;
   text-transform: capitalize;
 }
 
 #current-time {
   color: white;
-  font-size: 1rem;
+  font-size: 1em;
 }
-#current-weather-condition {
+#current-weather-condition-text {
   color: white;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1em;
   text-transform: capitalize;
 }
 
@@ -36,19 +37,17 @@
   display: flex;
   flex-direction: row;
   gap: 3px;
-  /* align-items: center; */
 }
 
-#fern-f {
+#fern-F {
   color: white;
-  font-size: 1rem;
+  font-size: 1.5em;
 }
 
 #fern-outer {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin-top: -10px; */
   border-radius: 8px;
   background-color: white;
   width: 8px;
@@ -69,7 +68,7 @@
 
 #temp {
   color: white;
-  font-size: 5rem;
+  font-size: 5em;
 }
 
 #bottom-current-box {
@@ -77,9 +76,127 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  /* color: aqua; */
+  /* font-size: 1em; */
 }
 
-#bottom-label {
+#humidity-value {
+  color: rgb(255, 254, 254);
+  font-size: 1.2em;
+}
+
+#humidity-icon {
+  position: relative; /* Ensure the parent element is positioned */
+  cursor: pointer;
   color: white;
-  font-size: 1rem;
+  font-size: 2em; /* Change cursor to pointer on hover */
+}
+
+#humidity-icon::after {
+  position: absolute;
+  top: -90%;
+  left: 100%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 5px;
+  background-color: #33343f;
+  padding: 5px;
+  content: "Humidity";
+  color: white;
+  font-size: 0.5em;
+  white-space: nowrap;
+}
+
+#humidity-icon:hover::after {
+  opacity: 1;
+}
+
+#wind-value {
+  color: rgb(255, 254, 254);
+  font-size: 1.2em;
+}
+
+#wind-icon {
+  position: relative;
+  cursor: pointer;
+  padding-top: 4px;
+  color: white;
+  font-size: 1.5em;
+}
+
+@keyframes shift {
+  33% {
+    transform: translateX(-15px); /* Move left */
+  }
+  66% {
+    transform: translateX(15px);
+  }
+}
+
+#wind-icon:hover {
+  animation: shift 1s ease-in-out infinite; /* Smooth transition */
+}
+
+#wind-icon-message {
+  position: relative;
+  color: rgb(19, 18, 18);
+  font-size: 1em;
+}
+
+#wind-icon-message::after {
+  position: absolute;
+  top: -110%;
+  left: 45%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 5px;
+  background-color: #33343f;
+  padding: 5px;
+  content: "Wind Speed";
+  color: white;
+  font-size: 1em;
+  white-space: nowrap;
+}
+
+#wind-icon-message:hover::after {
+  opacity: 1;
+}
+
+#rain-value {
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+}
+
+#rain-icon {
+  position: relative; /* Ensure the parent element is positioned */
+  transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transitions for color and opacity */
+  cursor: pointer;
+  color: white;
+  font-size: 1.8em; /* Change cursor to pointer on hover */
+}
+
+#rain-icon:hover {
+  color: #02137e; /* Change icon color to blue on hover */
+}
+
+#rain-icon::after {
+  position: absolute;
+  right: -160%;
+  bottom: 130%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 5px;
+  background-color: #33343f;
+  padding: 5px;
+  content: "Rain Chance";
+  color: white;
+  font-size: 0.49em;
+  white-space: nowrap;
+}
+
+#rain-icon:hover::after {
+  opacity: 1;
 }
