@@ -12,7 +12,7 @@ export const CustomAddressAutofill = ({
 
   useEffect(() => {
     const fetchSuggestions = async () => {
-      if (searchedCity.length > 2) {
+      if (searchedCity.trim().length > 2) {
         setfetchingSuggestions(true); // pinging Street Map for a valid city
         try {
           const response = await axios.get(
