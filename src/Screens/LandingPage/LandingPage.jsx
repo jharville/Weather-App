@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import "./LandingPage.css";
 
-const LandingPage = () => {
+export const LandingPage = () => {
   const [cityInput, setCityInput] = useState("");
   const [userErrorMessage, setUserErrorMessage] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    document.title = "Weather App";
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,7 +52,9 @@ const LandingPage = () => {
               <h1>Weather Getter</h1>
             </div>
             <form id="form-and-boxes-container" onSubmit={handleSubmit}>
+              {/* <AddressAutofill accessToken="pk.eyJ1Ijoiam9zZXBoaGFydmlsbGU5NiIsImEiOiJjbTBiZnd1OHEwM2VlMnJvdGE4eDdhZWJjIn0.f5ixUJf5mXnHZzIl0rft6Q"> */}
               <input
+                autoComplete="off"
                 id="enter-City-Name-Field"
                 type="text"
                 value={cityInput}
@@ -66,6 +64,7 @@ const LandingPage = () => {
               <button id="get-weather-button" type="submit">
                 <p>Get Weather</p>
               </button>
+              {/* </AddressAutofill> */}
             </form>
             <div>
               {userErrorMessage && (
@@ -78,5 +77,3 @@ const LandingPage = () => {
     </>
   );
 };
-
-export default LandingPage;

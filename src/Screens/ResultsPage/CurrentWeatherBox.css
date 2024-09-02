@@ -1,7 +1,7 @@
 #current-weather-box-contents {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 5px;
 }
 
 #current-weather-middle-row-container {
@@ -9,6 +9,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-top: 10px;
+  padding-right: 15px;
+  padding-bottom: 10px;
+  padding-left: 15px;
 }
 
 #current-weather-temp-container {
@@ -16,48 +20,26 @@
   flex-direction: row;
 }
 
-#current-weather-header {
+#current-weather-city-name {
+  padding-bottom: 10px;
+  max-height: 90px;
+  overflow: hidden;
   color: white;
-  font-size: 2.5em;
+  font-size: 1.5em;
   text-transform: capitalize;
 }
 
 #current-time {
   color: white;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 #current-weather-condition-text {
+  display: flex;
+  justify-content: center;
   color: white;
   font-weight: 600;
   font-size: 1em;
   text-transform: capitalize;
-}
-
-#fern-row {
-  display: flex;
-  flex-direction: row;
-  gap: 3px;
-}
-
-#fern-F {
-  color: white;
-  font-size: 1.5em;
-}
-
-#fern-outer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background-color: white;
-  width: 8px;
-  height: 8px;
-}
-#fern-inner {
-  border-radius: 5px;
-  background-color: #6a6f8d;
-  width: 5px;
-  height: 5px;
 }
 
 #current-weather-bottom-row-container {
@@ -66,9 +48,23 @@
   justify-content: space-between;
 }
 
+#temp-and-fahrenheit-box {
+  display: flex;
+  flex-direction: row;
+}
+
 #temp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
-  font-size: 5em;
+  font-size: 3em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#fahrenheit-symbol {
+  color: white;
+  font-size: 1em;
 }
 
 #bottom-current-box {
@@ -76,20 +72,31 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  /* color: aqua; */
-  /* font-size: 1em; */
 }
 
+#humidity-value-and-percent-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding-left: 2px;
+  color: rgb(255, 254, 254);
+  font-size: 1.2em;
+}
 #humidity-value {
   color: rgb(255, 254, 254);
   font-size: 1.2em;
 }
 
+#humidity-percent-sign {
+  color: white;
+  font-size: 0.9em;
+}
+
 #humidity-icon {
-  position: relative; /* Ensure the parent element is positioned */
+  position: relative;
   cursor: pointer;
   color: white;
-  font-size: 2em; /* Change cursor to pointer on hover */
+  font-size: 2em;
 }
 
 #humidity-icon::after {
@@ -112,9 +119,17 @@
   opacity: 1;
 }
 
-#wind-value {
+#wind-value-mph-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
   color: rgb(255, 254, 254);
   font-size: 1.2em;
+}
+
+#wind-mph {
+  color: white;
+  font-size: 0.7em;
 }
 
 #wind-icon {
@@ -127,7 +142,7 @@
 
 @keyframes shift {
   33% {
-    transform: translateX(-15px); /* Move left */
+    transform: translateX(-15px);
   }
   66% {
     transform: translateX(15px);
@@ -135,7 +150,7 @@
 }
 
 #wind-icon:hover {
-  animation: shift 1s ease-in-out infinite; /* Smooth transition */
+  animation: shift 1s ease-in-out infinite;
 }
 
 #wind-icon-message {
@@ -164,21 +179,34 @@
   opacity: 1;
 }
 
+#rain-value-and-percent-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: rgb(255, 254, 254);
+  font-size: 1.2em;
+}
+
 #rain-value {
   color: rgb(255, 255, 255);
   font-size: 1.2em;
 }
 
+#rain-percent-sign {
+  color: white;
+  font-size: 0.7em;
+}
+
 #rain-icon {
-  position: relative; /* Ensure the parent element is positioned */
-  transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transitions for color and opacity */
+  position: relative;
+  transition: color 0.3s ease, opacity 0.3s ease;
   cursor: pointer;
   color: white;
-  font-size: 1.8em; /* Change cursor to pointer on hover */
+  font-size: 1.8em;
 }
 
 #rain-icon:hover {
-  color: #02137e; /* Change icon color to blue on hover */
+  color: #02137e;
 }
 
 #rain-icon::after {
@@ -199,4 +227,17 @@
 
 #rain-icon:hover::after {
   opacity: 1;
+}
+
+#error-message-current-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  padding-top: 50px;
+  color: rgb(22, 22, 22);
+  font-size: 2em;
+  font-family: fantasy;
+  text-align: center;
 }

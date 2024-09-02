@@ -1,0 +1,100 @@
+#form-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#form {
+  display: flex;
+}
+
+#search-bar-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  border: 5px solid #000000;
+  border-color: #bbb8b8;
+  border-radius: 30px;
+  background-color: #276da291;
+  padding: 20px;
+  max-width: 350px;
+  height: 46px;
+  font-size: 1em;
+  text-align: center;
+}
+
+#search-bar-container:hover {
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border-color: #ffffff;
+}
+
+#search-bar-container:focus-within {
+  border-color: #ffffff;
+}
+
+#search-city-text-field-container {
+  display: flex;
+  position: relative;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  text-align: left;
+}
+
+#search-city-text-field {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  outline: none;
+  border-color: transparent;
+  background-color: transparent;
+  max-width: 150px;
+  height: 30px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1.5em;
+  text-align: left;
+  text-transform: capitalize;
+}
+
+#search-city-text-field::placeholder {
+  color: #e0e0e0ba;
+}
+
+#search-icon-button {
+  position: relative;
+  left: 18px;
+  align-items: center;
+  transform: scaleX(-1);
+  transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: #000000;
+  background-color: transparent;
+  color: #a3a3a3;
+  font-weight: 500;
+  font-size: 0.5em;
+  line-height: 30%;
+  font-family: inherit;
+}
+
+#search-icon-button:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+#search-icon-button:disabled:hover {
+  cursor: not-allowed;
+  color: #a3a3a3;
+}
+
+#search-icon-button-sizing {
+  width: 25px;
+  height: 25px;
+}
