@@ -111,15 +111,6 @@
   border-color: #ffffff;
 }
 
-#enter-City-Name-Field:-webkit-autofill {
-  -webkit-box-shadow: transparent;
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  transition: background-color 5000s ease-in-out 0s;
-  -webkit-text-fill-color: #ffffff; /*changes autofill text color*/
-  caret-color: white;
-  font-size: 1.8em;
-}
-
 #get-weather-button {
   display: flex;
   flex: 1;
