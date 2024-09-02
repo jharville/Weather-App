@@ -23,7 +23,7 @@ export const ResultPage = () => {
     const parts = searchedCity.split(",").map((part) => part.trim());
 
     if (parts.length === 1) {
-      return [parts[0], ""]; // If there is only one part, it's assumed to be the city, with no country. "" prevents undefined.
+      return [parts[0]]; // If there is only one part, it's assumed to be the city, with no country. "" prevents undefined.
     } else if (parts.length > 2) {
       return [parts[0], parts[2]]; // If there are more than two parts, the third part is considered the country.
     } else {
@@ -63,7 +63,7 @@ export const ResultPage = () => {
                 <div id="current-weather-box">
                   <CurrentWeatherBox
                     weatherFetchError={weatherFetchError}
-                    newCity={`${city} ${country}`}
+                    newCity={`${city || ""} ${country || ""}`}
                     temperature={Math.round(weather?.current?.temperature_2m)}
                     generalWeatherCondition={getWeatherLabel(
                       weather?.current?.weather_code
