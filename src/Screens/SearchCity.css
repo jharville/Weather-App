@@ -1,13 +1,4 @@
-#form-container {
-  display: flex;
-  justify-content: flex-start;
-}
-
-#form {
-  display: flex;
-}
-
-#search-bar-container {
+#search-Bar-Container {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -27,16 +18,16 @@
   text-align: center;
 }
 
-#search-bar-container:hover {
+#search-Bar-Container:hover {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-color: #ffffff;
 }
 
-#search-bar-container:focus-within {
+#search-Bar-Container:focus-within {
   border-color: #ffffff;
 }
 
-#search-city-text-field-container {
+#search-City-Text-Field-Container {
   display: flex;
   position: relative;
   flex: 1;
@@ -46,14 +37,14 @@
   text-align: left;
 }
 
-#search-city-text-field {
+#search-City-Text-Field {
   display: flex;
   flex: 1;
   justify-content: center;
   outline: none;
   border-color: transparent;
   background-color: transparent;
-  max-width: 150px;
+  max-width: 200px;
   height: 30px;
   color: #ffffff;
   font-weight: 500;
@@ -62,13 +53,13 @@
   text-transform: capitalize;
 }
 
-#search-city-text-field::placeholder {
+#search-City-Text-Field::placeholder {
   color: #e0e0e0ba;
 }
 
-#search-icon-button {
+#search-Icon-Button {
   position: relative;
-  left: 18px;
+  /* left: 18px; */
   align-items: center;
   transform: scaleX(-1);
   transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
@@ -84,17 +75,17 @@
   font-family: inherit;
 }
 
-#search-icon-button:hover {
+#search-Icon-Button:hover {
   background-color: transparent;
   color: #ffffff;
 }
 
-#search-icon-button:disabled:hover {
+#search-Icon-Button:disabled:hover {
   cursor: not-allowed;
   color: #a3a3a3;
 }
 
-#search-icon-button-sizing {
+#search-Icon-Button-Sizing {
   width: 25px;
   height: 25px;
 }

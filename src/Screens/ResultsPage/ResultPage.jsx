@@ -2,11 +2,12 @@ import "./ResultPage.css";
 import { getWeatherLabel } from "./getWeatherStatus.jsx";
 import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.mov";
 import { useNavigate } from "react-router-dom";
-import { SearchCity } from "./SearchCity.jsx";
+import { SearchCity } from "../SearchCity.jsx";
 import { useEffect } from "react";
 import { loadingStatuses, useWeatherFetch } from "./useWeatherFetch.js";
 import { CurrentWeatherBox } from "./CurrentWeatherBox.jsx";
 import { FaHome } from "react-icons/fa";
+// import { MapDisplay } from "./MapDisplay.jsx";
 
 export const ResultPage = () => {
   const { weather, fetchWeather, loadingStatus, weatherFetchError } =
@@ -18,9 +19,11 @@ export const ResultPage = () => {
     navigate("/");
   };
 
-  const searchedCity = new URLSearchParams(window.location.search).get("city");
+  const userSearchedCity = new URLSearchParams(window.location.search).get(
+    "city"
+  );
   const [city, country] = (() => {
-    const parts = searchedCity.split(",").map((part) => part.trim());
+    const parts = userSearchedCity.split(",").map((part) => part.trim());
 
     if (parts.length === 1) {
       return [parts[0]]; // If there is only one part, it's assumed to be the city, with no country. "" prevents undefined.
@@ -32,10 +35,10 @@ export const ResultPage = () => {
   })();
 
   useEffect(() => {
-    if (searchedCity) {
-      fetchWeather(searchedCity);
+    if (userSearchedCity) {
+      fetchWeather(userSearchedCity);
     }
-  }, [searchedCity, fetchWeather]);
+  }, [userSearchedCity, fetchWeather]);
 
   return (
     <>
@@ -78,9 +81,7 @@ export const ResultPage = () => {
                 </div>
                 <div id="map-uv-container">
                   <div id="map-box">
-                    <div>
-                      <p>MAP: {}</p>
-                    </div>
+                    <div>{/* <MapDisplay /> */}</div>
                   </div>
                   <div id="humidity-uv-box">
                     <div>

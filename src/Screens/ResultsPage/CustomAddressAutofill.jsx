@@ -1,19 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./CustomAddressAutofill.css";
 
+// We're retarded. We had this debounce logic defined inside the component. Move it inside and see the ESlint error.
+// Also fuck this debounce logic. Shit looks like dick.
+
+let timeoutId;
+const debounce = (func, delay) => {
+  return (...args) => {
+    if (timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};
+
 export const CustomAddressAutofill = ({
   onAcceptedSuggestion,
+  onNotSuggestionSubmit,
   searchedCity,
   children,
 }) => {
   const [suggestions, setSuggestions] = useState([]);
-  const [, setfetchingSuggestions] = useState(false);
 
   useEffect(() => {
     const fetchSuggestions = async () => {
       if (searchedCity.trim().length > 2) {
-        setfetchingSuggestions(true); // pinging Street Map for a valid city
         try {
           const response = await axios.get(
             `https://nominatim.openstreetmap.org/search?q=${searchedCity}&format=json&limit=5`
@@ -22,23 +34,34 @@ export const CustomAddressAutofill = ({
         } catch (error) {
           console.error("Error Fetching Suggestions:", error);
           setSuggestions([]); // hide suggestions on error
-        } finally {
-          setfetchingSuggestions(false); // End loading
         }
-      } else {
-        setSuggestions([]); // Clear suggestions if input is too short
+      }
+      if (searchedCity.trim().length < 2) {
+        return setSuggestions([]);
       }
     };
+    // wait 600 ms before suggestions are fetched
+    const debouncedFetchSuggestions = debounce(fetchSuggestions, 600);
 
-    fetchSuggestions();
+    debouncedFetchSuggestions();
+    return () => clearTimeout(timeoutId);
   }, [searchedCity]);
 
-  const handleSuggestionClick = (city) => {
-    if (onAcceptedSuggestion) {
-      onAcceptedSuggestion(city); // notifies parent component (SearchCity) and triggers search
+  const handleSuggestionClick = useCallback(
+    (city) => {
+      if (onAcceptedSuggestion) {
+        onAcceptedSuggestion(city); // notifies parent component (SearchCity) and triggers search
+        setSuggestions([]);
+      }
+    },
+    [onAcceptedSuggestion]
+  );
+
+  useEffect(() => {
+    if (onNotSuggestionSubmit) {
       setSuggestions([]);
     }
-  };
+  }, [onNotSuggestionSubmit]);
 
   return (
     <div>
@@ -46,7 +69,7 @@ export const CustomAddressAutofill = ({
       {!!suggestions.length && (
         <div id="custom-address-autofill-result">
           <ul>
-            {suggestions.map((city) => (
+            {suggestions.slice(0, 3).map((city) => (
               <li
                 key={city.place_id}
                 onClick={() => handleSuggestionClick(city)}
