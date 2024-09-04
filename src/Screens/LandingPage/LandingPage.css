@@ -27,17 +27,13 @@
   justify-content: center;
   align-items: center;
   height: 1000px;
-
-  /* padding-top: 150px; */
 }
 
 #flex-box-Landing {
   display: flex;
-
-  justify-content: center; /* Center children vertically */
-  align-items: center; /* Center children horizontally */
-
-  max-width: 524px; /* Maximum width of the container */
+  justify-content: center;
+  align-items: center;
+  max-width: 524px;
 }
 
 .weather-app-container-Landing {
@@ -51,11 +47,11 @@
   border: solid 8px rgb(255, 255, 255);
   border-radius: 20px;
   background: linear-gradient(#3274a6, #768087);
-  padding: 30px;
-  padding-top: 80px;
+  /* padding: 30px; */
+  padding-top: 50px;
   padding-bottom: 50px;
-  width: 600px;
-  height: 600px;
+  /* width: 600px; */
+  height: 550px;
   color: #ffffff;
   text-align: center;
 }
@@ -72,78 +68,137 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-#form-and-boxes-container {
+#error-message-landing {
+  padding-bottom: 25px;
+  color: rgb(118, 17, 17);
+  font-size: 2em;
+  font-family: fantasy;
+  text-align: center;
+}
+
+/* -----------------------------------------------------------------------*/
+
+/* Override styles for #search-Bar-Container */
+.weather-app-container-Landing #search-Bar-Container {
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 25px;
-}
-
-#enter-City-Name-Field {
-  display: flex;
-  flex: 1;
+  z-index: 2;
   transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 5px solid #bbb8b8;
+  box-sizing: border-box;
+  border: 5px solid #000000;
+  border-color: #bbb8b8;
   border-radius: 30px;
-  background-color: #212020;
-  min-width: 400px;
-  min-height: 55px;
-  /* max-height: 55px; */
-  color: #ffffff;
-  font-size: 1.8em;
+  background-color: #276da291;
+  max-width: 370px;
+  max-height: 55px;
+  font-size: 1.2em;
   text-align: center;
-  text-transform: capitalize;
 }
 
-#enter-City-Name-Field::placeholder {
-  color: #c5c4c4ba;
-}
-
-#enter-City-Name-Field:hover {
+.weather-app-container-Landing #search-Bar-Container:hover {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   border-color: #ffffff;
 }
 
-#enter-City-Name-Field:focus {
-  outline: none;
+.weather-app-container-Landing #search-Bar-Container:focus-within {
   border-color: #ffffff;
 }
 
-#get-weather-button {
+.weather-app-container-Landing #search-City-Text-Field-Container {
   display: flex;
+  position: relative;
   flex: 1;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: text-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  border: 6px solid rgb(2, 85, 127);
-  border-radius: 20px;
-  background-color: #212020;
-  padding: 20px;
-  /* min-width: 200px; */
-  max-height: 100px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 2em;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-}
-
-#get-weather-button:hover,
-#get-weather-button:focus {
-  border: 6px solid;
-  border-color: rgb(3, 137, 204);
-  text-shadow: 0 0 10px rgb(6, 201, 255);
-}
-
-#error-message-landing {
-  padding-bottom: 25px;
-  color: red;
-  font-size: 2em;
-  font-family: fantasy;
+  background-color: transparent;
+  width: 450px;
   text-align: center;
+}
+
+.weather-app-container-Landing #search-City-Text-Field {
+  display: flex;
+  position: relative;
+  left: 20px;
+  flex: 1;
+  justify-content: center;
+  outline: none;
+  border-color: transparent;
+  background-color: transparent;
+  max-width: 220px;
+  height: 30px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 1.5em;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.weather-app-container-Landing #search-City-Text-Field::placeholder {
+  color: #e0e0e0ba;
+}
+
+.weather-app-container-Landing #search-Icon-Button {
+  position: relative;
+  right: 5px;
+  transform: scaleX(-1);
+  transition: text-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  background-color: transparent;
+  color: #a3a3a3;
+  font-weight: 500;
+  font-size: 0.5em;
+  line-height: 30%;
+  font-family: inherit;
+}
+
+.weather-app-container-Landing #search-Icon-Button:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.weather-app-container-Landing #search-Icon-Button:disabled:hover {
+  cursor: not-allowed;
+  color: #a3a3a3;
+}
+
+.weather-app-container-Landing #search-Icon-Button-Sizing {
+  width: 25px;
+  height: 25px;
+}
+
+/* ---------------------------------------------------- */
+
+/* Overide styling for Autofill */
+.weather-app-container-Landing #custom-address-autofill-result {
+  position: absolute;
+  top: 46px;
+  z-index: 95;
+  border: solid 4px;
+  border-color: #00f0f8;
+  border-radius: 8px;
+  background-color: #333;
+  padding: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.weather-app-container-Landing #custom-address-autofill-result ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.weather-app-container-Landing #custom-address-autofill-result li {
+  margin: 0;
+  border-bottom: 2px solid #00f0f884;
+  padding: 5px 10px;
+  font-size: 1.15em;
+}
+
+.weather-app-container-Landing #custom-address-autofill-result li:last-child {
+  border-bottom: none;
 }

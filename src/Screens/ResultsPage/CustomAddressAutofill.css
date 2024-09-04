@@ -2,11 +2,12 @@
   position: absolute;
   top: 43px;
   z-index: 95;
-  border: solid 3px;
-  border-color: #000000;
+  border: solid 4px;
+  border-color: #00f0f8;
   border-radius: 8px;
-  background-color: rgb(245, 239, 239);
+  background-color: #333;
   padding: 10px;
+  color: rgb(255, 255, 255);
 }
 
 #custom-address-autofill-result ul {
@@ -17,26 +18,11 @@
 
 #custom-address-autofill-result li {
   margin: 0;
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid #00f0f884;
   padding: 5px 10px;
+  font-size: 1.15em;
 }
 
 #custom-address-autofill-result li:last-child {
   border-bottom: none;
-}
-
-#search-city-text-field {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  outline: none;
-  border-color: transparent;
-  background-color: transparent;
-  max-width: 150px;
-  height: 30px;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 1.5em;
-  text-align: left;
-  text-transform: capitalize;
 }

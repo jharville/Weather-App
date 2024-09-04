@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 
+const ampmStyling = {
+  paddingLeft: "7px",
+  fontSize: "18px",
+};
+
 export const CurrentTime = () => {
   const [time, setTime] = useState(new Date());
 
@@ -16,12 +21,6 @@ export const CurrentTime = () => {
   const formattedHours = hours % 12 || 12;
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-  const ampmStyling = {
-    paddingLeft: "7px",
-    fontSize: "18px",
-    // textShadow: `0 0 2px black, 0 0 1px black, 0 0 1px black, 0 0 1px black`,
-  };
 
   const formattedTime = (
     <>

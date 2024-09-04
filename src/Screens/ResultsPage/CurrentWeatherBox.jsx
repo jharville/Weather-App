@@ -6,13 +6,6 @@ import { SiRainmeter } from "react-icons/si";
 import { CurrentTime } from "./CurrentTime";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 
-const tempLoadingStyle = {
-  fontSize: "0.5em",
-  color: "#27FF00",
-  paddingRight: "20px",
-  paddingBottom: "10px",
-};
-
 export const CurrentWeatherBox = ({
   temperature,
   humidity = "-",
@@ -23,6 +16,10 @@ export const CurrentWeatherBox = ({
   generalWeatherCondition,
   isLoading,
 }) => {
+  const formattedHumidity = humidity === 0 ? humidity : humidity || "-";
+  const formattedWindSpeed = windSpeed === 0 ? windSpeed : windSpeed || "-";
+  const formattedRain = rain === 0 ? rain : rain || "-";
+
   return weatherFetchError ? (
     <div id="error-message-current-box">{weatherFetchError}</div>
   ) : (
@@ -39,7 +36,7 @@ export const CurrentWeatherBox = ({
           <div>
             <h1 id="temp">
               {isLoading ? (
-                <p style={tempLoadingStyle}>Loading...</p>
+                <p id="temp-loading-text">Loading...</p>
               ) : (
                 <div id="temp-and-fahrenheit-box">
                   {temperature}
@@ -55,23 +52,20 @@ export const CurrentWeatherBox = ({
       </div>
       <div id="current-weather-bottom-row-container">
         <div id="bottom-current-box">
-          {humidity != null ? (
-            <div id="humidity-value-and-percent-container">
-              <p id="humidity-value">{humidity}</p>
-              <p id="humidity-percent-sign">%</p>
-            </div>
-          ) : null}
+          <div id="humidity-value-and-percent-container">
+            <p id="humidity-value">{formattedHumidity}</p>
+            <p id="humidity-percent-sign">%</p>
+          </div>
+
           <div id="humidity-icon">
             <WiHumidity />
           </div>
         </div>
         <div id="bottom-current-box">
-          {windSpeed != null ? (
-            <div id="wind-value-mph-container">
-              {windSpeed}
-              <p id="wind-mph">mph</p>
-            </div>
-          ) : null}
+          <div id="wind-value-mph-container">
+            {formattedWindSpeed}
+            <p id="wind-mph">mph</p>
+          </div>
           <div id="wind-icon-message">
             <div id="wind-icon">
               <FaWind />
@@ -80,12 +74,10 @@ export const CurrentWeatherBox = ({
         </div>
         <div id="bottom-current-box">
           <p id="rain-value">
-            {rain != null ? (
-              <div id="rain-value-and-percent-container">
-                {rain}
-                <p id="rain-percent-sign">%</p>
-              </div>
-            ) : null}
+            <div id="rain-value-and-percent-container">
+              {formattedRain}
+              <p id="rain-percent-sign">%</p>
+            </div>
           </p>
           <div id="rain-icon">
             <SiRainmeter />

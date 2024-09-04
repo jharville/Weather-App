@@ -114,15 +114,15 @@ export const getWeatherIcon = (status) => {
 
   switch (status) {
     case weatherStatuses.clear:
-      return <FaSun color="goldenrod" size={80} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
     case weatherStatuses.mainlyClear:
-      return <FaSun color="goldenrod" size={80} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
     case weatherStatuses.partlyCloudy:
       return <CiCloudSun color="white" size={80} style={iconStyles} />;
     case weatherStatuses.overcast:
       return <BsClouds color="white" size={80} style={iconStyles} />;
     case weatherStatuses.foggy:
-      return <BsCloudFog2 color="goldenrod" size={80} style={iconStyles} />;
+      return <BsCloudFog2 color="goldenrod" size={79} style={iconStyles} />;
     case weatherStatuses.drizzlingLightly:
       return <PiCloudRain color="white" size={80} style={iconStyles} />;
     case weatherStatuses.drizzlingModeratly:
@@ -186,6 +186,6 @@ export const getWeatherIcon = (status) => {
         <BsCloudLightningRainFill color="black" size={90} style={iconStyles} />
       );
     default:
-      return <FaSun color="goldenrod" size={80} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
   }
 };
