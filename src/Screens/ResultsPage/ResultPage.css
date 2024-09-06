@@ -183,22 +183,11 @@
   gap: 10px;
 }
 
-#map-box {
+#mapbox-container {
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  box-sizing: border-box;
-  border: 8px solid #000000;
-  border-color: #000000;
-  border-radius: 20px;
-  background-color: #36057b;
-  padding: 20px;
-  min-width: 500px;
-  max-width: 700px;
-  font-weight: 600;
-  font-size: 2em;
-  text-align: center;
+  background-color: transparent;
 }
 
 #humidity-uv-box {

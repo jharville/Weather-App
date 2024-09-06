@@ -1,29 +1,52 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { SearchCity } from "../SearchCity";
 import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import "./LandingPage.css";
+import { isValidAddress } from "../isValidAddress";
 
 export const LandingPage = () => {
-  const [userErrorMessage, setUserErrorMessage] = useState("");
+  const [userTextInput, setUserTextInput] = useState("");
+  const [, setSearchParams] = useSearchParams();
+  const [userErrorMessage, setUserErrorMessage] = useState(null);
   const navigateToResult = useNavigate();
 
-  const handleSearchSubmit = async (cityInput) => {
-    try {
-      if (!cityInput.trim()) {
-        throw new Error("No city was entered");
-      }
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${cityInput}&format=json&limit=1`
+  const handleSearchSubmit = async (event) => {
+    const isValid = await isValidAddress(userTextInput.trim());
+    if (isValid) {
+      event.preventDefault();
+      setSearchParams({ city: userTextInput.trim() });
+      navigateToResult(
+        `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
       );
-      const data = await response.json();
-      if (data.length === 0) {
-        throw new Error("Couldn't find a city");
+    } else {
+      setUserErrorMessage("Please Enter A Valid City");
+    }
+  };
+
+  const handleEnterPressSubmit = async (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const isValid = await isValidAddress(userTextInput.trim());
+      if (isValid) {
+        setSearchParams({ city: userTextInput.trim() });
+        navigateToResult(
+          `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
+        );
+      } else {
+        setUserErrorMessage("Please Enter A Valid City");
       }
-      // Navigate to the result page
-      navigateToResult(`/ResultPage?city=${encodeURIComponent(cityInput)}`);
-    } catch (error) {
-      console.error("Error:", error.message);
+    }
+  };
+
+  const handleSuggestionClick = async () => {
+    const isValid = await isValidAddress(userTextInput.trim());
+    if (isValid) {
+      setSearchParams({ city: userTextInput.trim() });
+      navigateToResult(
+        `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
+      );
+    } else {
       setUserErrorMessage("Please Enter A Valid City");
     }
   };
@@ -47,8 +70,11 @@ export const LandingPage = () => {
               <h1>Weather Getter</h1>
             </div>
             <SearchCity
-              onSearchSubmit={handleSearchSubmit}
-              onError={setUserErrorMessage}
+              handleSearchSubmit={handleSearchSubmit}
+              handleEnterPressSubmit={handleEnterPressSubmit}
+              handleSuggestionClick={handleSuggestionClick}
+              userTextInput={userTextInput}
+              setUserTextInput={setUserTextInput}
             />
             <div>
               {userErrorMessage && (

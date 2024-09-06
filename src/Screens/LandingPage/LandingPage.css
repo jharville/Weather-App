@@ -69,7 +69,7 @@
 }
 
 #error-message-landing {
-  padding-bottom: 25px;
+  /* padding-bottom: 20px; */
   color: rgb(118, 17, 17);
   font-size: 2em;
   font-family: fantasy;

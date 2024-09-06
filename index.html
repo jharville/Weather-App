@@ -1,13 +1,20 @@
 <!DOCTYPE html>
+<!-- This declaration defines the document type and ensures the browser renders it in standards mode (modern HTML5). -->
 <html lang="en">
   <head>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!-- Specifies the character encoding of the document (UTF-8 is standard and supports most characters) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <!--  Controls how the site is displayed on mobile devices. -->
   </head>
   <body>
     <div id="root"></div>
+    <!-- The empty div with the ID root is where the React app will be injected and rendered -->
     <script type="module" src="/src/main.jsx"></script>
+    <!-- This script tag loads the main React file (main.jsx), where the React app gets initialized -->
   </body>
 </html>

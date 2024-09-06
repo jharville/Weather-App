@@ -1,32 +1,59 @@
 import "./ResultPage.css";
-import { getWeatherLabel } from "./getWeatherStatus.jsx";
+import { getWeatherLabel } from "../getWeatherStatus.jsx";
 import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.mov";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { SearchCity } from "../SearchCity.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { loadingStatuses, useWeatherFetch } from "./useWeatherFetch.js";
 import { CurrentWeatherBox } from "./CurrentWeatherBox.jsx";
 import { FaHome } from "react-icons/fa";
-// import { MapDisplay } from "./MapDisplay.jsx";
+import { MapDisplay } from "./MapDisplay.jsx";
 
 export const ResultPage = () => {
+  const [, setSearchParams] = useSearchParams();
+  const [userTextInput, setUserTextInput] = useState("");
+
   const { weather, fetchWeather, loadingStatus, weatherFetchError } =
     useWeatherFetch();
   const isLoading = loadingStatus === loadingStatuses.loading;
   const navigate = useNavigate();
 
+  const userSearchedCity = new URLSearchParams(window.location.search).get(
+    "city"
+  );
+
   const handleHomeClick = () => {
     navigate("/");
   };
 
-  const userSearchedCity = new URLSearchParams(window.location.search).get(
-    "city"
-  );
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const trimmedInput = userTextInput.trim();
+    setUserTextInput("");
+    setSearchParams({ city: trimmedInput });
+  };
+
+  const handleEnterPressSubmit = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const trimmedInput = userTextInput.trim();
+      setUserTextInput("");
+      setSearchParams({ city: trimmedInput });
+      handleSearchSubmit(event);
+    }
+  };
+
+  const handleSuggestionClick = (city) => {
+    const cityName = city.display_name;
+    setUserTextInput("");
+    setSearchParams({ city: cityName });
+  };
+
+  //For displaying only the city and country/city returned from the autofill.
   const [city, country] = (() => {
     const parts = userSearchedCity.split(",").map((part) => part.trim());
-
     if (parts.length === 1) {
-      return [parts[0]]; // If there is only one part, it's assumed to be the city, with no country. "" prevents undefined.
+      return [parts[0]]; // If there is only one part, it's assumed to be the city, with no country.
     } else if (parts.length > 2) {
       return [parts[0], parts[2]]; // If there are more than two parts, the third part is considered the country.
     } else {
@@ -59,7 +86,13 @@ export const ResultPage = () => {
           <div id="parent-of-flex-grid-container">
             <div id="flex-grid-containers-total">
               <div id="flex-grid-row-w-search-bar">
-                <SearchCity />
+                <SearchCity
+                  handleEnterPressSubmit={handleEnterPressSubmit}
+                  handleSearchSubmit={handleSearchSubmit}
+                  handleSuggestionClick={handleSuggestionClick}
+                  userTextInput={userTextInput}
+                  setUserTextInput={setUserTextInput}
+                />
                 <div id="map-uv-container-invisible" />
               </div>
               <div id="flex-grid-row">
@@ -80,8 +113,8 @@ export const ResultPage = () => {
                   />
                 </div>
                 <div id="map-uv-container">
-                  <div id="map-box">
-                    <div>{/* <MapDisplay /> */}</div>
+                  <div id="mapbox-container">
+                    <MapDisplay />
                   </div>
                   <div id="humidity-uv-box">
                     <div>

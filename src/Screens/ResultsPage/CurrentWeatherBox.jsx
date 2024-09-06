@@ -1,5 +1,5 @@
 import "./CurrentWeatherBox.css";
-import { getWeatherIcon } from "./getWeatherStatus.jsx";
+import { getWeatherIcon } from "../getWeatherStatus.jsx";
 import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa";
 import { SiRainmeter } from "react-icons/si";
