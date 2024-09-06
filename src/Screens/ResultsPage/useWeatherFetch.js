@@ -7,6 +7,32 @@ export const loadingStatuses = {
   fulfilled: "fulfilled",
 };
 
+/**
+ * useWeatherFetch is a hook for fetching weather variables from the Open Mateo API.
+ * This destructured hook returns the following values:
+ * 
+weather:
+Type: Object or Null.
+Description: Contains the weather data retrieved from the API. Initially, it's null before any data is fetched. 
+Once data is fetched successfully, it holds the weather data structure returned from the Open Meteo API.
+
+fetchWeather:
+Type: Function.
+Description: A function that takes a cityName as an argument and initiates the process of fetching weather data for that city. 
+This function performs the API requests to retrieve geographical coordinates and weather data, handles errors, and updates the states accordingly.
+
+weatherFetchError:
+Type: String or Null.
+Description: Contains an error message if an error occurs during the fetch operation.
+It is null if no errors occur or if the weather data is successfully fetched.
+
+loadingStatus:
+Type: String.
+Description: Indicates the current status of the fetching operation. It can be one of the following:
+Idle: No fetch operation is currently in progress.
+Loading: The fetch operation is in progress.
+Fulfilled: The fetch operation has completed, either successfully or with an error.
+ */
 export const useWeatherFetch = () => {
   const [weather, setWeather] = useState(null);
   const [weatherFetchError, setWeatherFetchError] = useState(null);
@@ -36,6 +62,5 @@ export const useWeatherFetch = () => {
       setLoadingStatus(loadingStatuses.fulfilled);
     }
   }, []);
-
   return { weather, fetchWeather, weatherFetchError, loadingStatus };
 };

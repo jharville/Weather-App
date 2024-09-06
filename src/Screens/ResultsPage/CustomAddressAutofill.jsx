@@ -2,15 +2,17 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./CustomAddressAutofill.css";
 
-// We're retarded. We had this debounce logic defined inside the component. Move it inside and see the ESlint error.
-// Also fuck this debounce logic. Shit looks like dick.
+// Global variable to store timeout ID for the debounce function
+let timer;
 
-let timeoutId;
-const debounce = (func, delay) => {
-  return (...args) => {
-    if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      func(...args);
+// Debounce function: delays the execution of a function by a specified time (delay)
+const debounce = (callbackFunction, delay) => {
+  return (searchedCity) => {
+    // Clear any previously set timeout to reset the delay countdown
+    if (timer) clearTimeout(timer);
+    // Set a new timeout to execute the callback after the delay
+    timer = setTimeout(() => {
+      callbackFunction(searchedCity); // Call the provided callback function with the searchedCity
     }, delay);
   };
 };
@@ -25,7 +27,7 @@ export const CustomAddressAutofill = ({
 
   useEffect(() => {
     const fetchSuggestions = async () => {
-      if (searchedCity.trim().length > 2) {
+      if (searchedCity.trim()) {
         try {
           const response = await axios.get(
             `https://nominatim.openstreetmap.org/search?q=${searchedCity}&format=json&limit=5`
@@ -36,15 +38,18 @@ export const CustomAddressAutofill = ({
           setSuggestions([]); // hide suggestions on error
         }
       }
-      if (searchedCity.trim().length < 2) {
+      if (!searchedCity.trim()) {
         return setSuggestions([]);
       }
     };
     // wait 600 ms before suggestions are fetched
-    const debouncedFetchSuggestions = debounce(fetchSuggestions, 600);
+    const debouncedFetchSuggestions = debounce(fetchSuggestions, 500);
 
-    debouncedFetchSuggestions();
-    return () => clearTimeout(timeoutId);
+    // invoking the debounced function
+    debouncedFetchSuggestions(searchedCity);
+
+    //clean up the debounce
+    return () => clearTimeout(timer);
   }, [searchedCity]);
 
   const handleSuggestionClick = useCallback(
@@ -63,6 +68,7 @@ export const CustomAddressAutofill = ({
     }
   }, [onNotSuggestionSubmit]);
 
+  // console.log(suggestions);
   return (
     <div>
       {children}
