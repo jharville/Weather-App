@@ -9,16 +9,20 @@ export const LandingPage = () => {
   const [userTextInput, setUserTextInput] = useState("");
   const [, setSearchParams] = useSearchParams();
   const [userErrorMessage, setUserErrorMessage] = useState(null);
-  const navigateToResult = useNavigate();
+  const navigate = useNavigate();
+
+  const isValid = async (userTextInput) => {
+    const valid = await isValidAddress(userTextInput.trim());
+    if (valid) {
+      return true;
+    }
+  };
 
   const handleSearchSubmit = async (event) => {
-    const isValid = await isValidAddress(userTextInput.trim());
     if (isValid) {
       event.preventDefault();
       setSearchParams({ city: userTextInput.trim() });
-      navigateToResult(
-        `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
-      );
+      navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
     } else {
       setUserErrorMessage("Please Enter A Valid City");
     }
@@ -27,10 +31,9 @@ export const LandingPage = () => {
   const handleEnterPressSubmit = async (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const isValid = await isValidAddress(userTextInput.trim());
       if (isValid) {
         setSearchParams({ city: userTextInput.trim() });
-        navigateToResult(
+        navigate(
           `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
         );
       } else {
@@ -40,12 +43,9 @@ export const LandingPage = () => {
   };
 
   const handleSuggestionClick = async () => {
-    const isValid = await isValidAddress(userTextInput.trim());
     if (isValid) {
       setSearchParams({ city: userTextInput.trim() });
-      navigateToResult(
-        `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
-      );
+      navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
     } else {
       setUserErrorMessage("Please Enter A Valid City");
     }

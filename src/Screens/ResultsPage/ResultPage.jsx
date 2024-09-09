@@ -11,24 +11,24 @@ import { MapDisplay } from "./MapDisplay.jsx";
 
 export const ResultPage = () => {
   const [, setSearchParams] = useSearchParams();
-  const [userTextInput, setUserTextInput] = useState("");
-
-  const { weather, fetchWeather, loadingStatus, weatherFetchError } =
-    useWeatherFetch();
-  const isLoading = loadingStatus === loadingStatuses.loading;
-  const navigate = useNavigate();
-
   const userSearchedCity = new URLSearchParams(window.location.search).get(
     "city"
   );
 
+  const [userTextInput, setUserTextInput] = useState("");
+  const trimmedInput = userTextInput.trim();
+
+  const { weather, fetchWeather, loadingStatus, weatherFetchError } =
+    useWeatherFetch();
+  const isLoading = loadingStatus === loadingStatuses.loading;
+
+  const navigate = useNavigate();
   const handleHomeClick = () => {
     navigate("/");
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    const trimmedInput = userTextInput.trim();
     setUserTextInput("");
     setSearchParams({ city: trimmedInput });
   };
@@ -36,7 +36,6 @@ export const ResultPage = () => {
   const handleEnterPressSubmit = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      const trimmedInput = userTextInput.trim();
       setUserTextInput("");
       setSearchParams({ city: trimmedInput });
       handleSearchSubmit(event);
