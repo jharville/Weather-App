@@ -1,0 +1,148 @@
+#forcast-box-contents-container {
+  padding: 20px;
+  min-height: 280px;
+  max-height: 356px;
+}
+
+#contents-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#forcast-text-and-day-selector-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#forcast-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  color: rgb(255, 255, 255);
+  font-size: 0.8em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#day-selector-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  border-radius: 8px;
+  background-color: #133f61fe;
+  padding: 7px;
+}
+
+#day-param-select {
+  cursor: pointer;
+  border-radius: 7px;
+  background-color: #afb0b7;
+  padding: 4.5px;
+  font-size: 0.5em;
+}
+
+#day-param-select.clicked {
+  cursor: default;
+  background-color: #196cf1;
+  color: rgb(240, 232, 232);
+}
+
+#forcast-days-container {
+  max-height: 230px;
+  overflow-y: scroll;
+}
+
+#clickable-days-container {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+#clickable-days-container :hover {
+  border-radius: 8px;
+  background-color: #1b4d74;
+}
+
+#clickable-forcast-day {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  max-height: 23px;
+}
+
+#year-month-day-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  color: white;
+  font-weight: 350;
+  font-size: 0.55em;
+  font-family: "Roboto", sans-serif;
+}
+
+#icon-and-high-low-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+#temp-high-low-and-f-symbol {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  align-items: center;
+  gap: 5px;
+}
+
+#temp-high-low-styling {
+  color: rgb(255, 255, 255);
+  font-weight: 350;
+  font-size: 0.58em;
+  font-family: "Roboto", sans-serif;
+}
+
+#fahrenheit-symbol {
+  font-size: 0.65em;
+}
+
+#weather-icon-styling {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  max-width: 25px;
+  max-height: 25px;
+  pointer-events: none;
+}
+
+#forcast-days-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+#forcast-days-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #f1f1f1;
+}
+
+#forcast-days-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #253877;
+}
+
+#forcast-days-container::-webkit-scrollbar-thumb:hover {
+  cursor: grab;
+}
+
+#forcast-days-container.hide-scrollbar {
+  overflow-y: hidden;
+}
