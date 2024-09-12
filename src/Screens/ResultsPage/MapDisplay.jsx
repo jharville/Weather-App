@@ -42,9 +42,6 @@ export const MapDisplay = () => {
     if (cityName) {
       fetchCityCoordinates(cityName);
     }
-
-    // Cleanup on unmount
-    // return () => mapRef.current.remove();
   }, [searchParams, cityName, fetchCityCoordinates]);
 
   return (

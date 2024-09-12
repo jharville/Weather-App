@@ -2,12 +2,15 @@
   position: absolute;
   top: 43px;
   z-index: 95;
+  cursor: pointer;
   border: solid 4px;
   border-color: #00f0f8;
   border-radius: 8px;
   background-color: #333;
   padding: 10px;
   color: rgb(255, 255, 255);
+  font-weight: 300;
+  font-family: "Roboto", sans-serif;
 }
 
 #custom-address-autofill-result ul {

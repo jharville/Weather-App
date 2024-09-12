@@ -25,6 +25,7 @@ export const CurrentWeatherBox = ({
   ) : (
     <div id="current-weather-box-contents">
       <div id="current-weather-top-row-container">
+        <p id="current-weather-in-text">Current Weather in:</p>
         <p id="current-weather-city-name">{newCity}</p>
         <div id="current-time">
           <CurrentTime />
@@ -73,12 +74,12 @@ export const CurrentWeatherBox = ({
           </div>
         </div>
         <div id="bottom-current-box">
-          <p id="rain-value">
+          <div id="rain-value">
             <div id="rain-value-and-percent-container">
               {formattedRain}
               <p id="rain-percent-sign">%</p>
             </div>
-          </p>
+          </div>
           <div id="rain-icon">
             <SiRainmeter />
           </div>

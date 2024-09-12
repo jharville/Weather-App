@@ -89,6 +89,7 @@ export const WMOs = [
 // 96, 99 *	Thunderstorm with slight and heavy hail
 
 /**
+ * Stored in getWeatherSatus file.
  * Retrieves the general weather conditions corresponding to the given weather code based on the city entered.
  *
  * This function searches through a list of WMO (World Meteorological Organization) codes to find
@@ -102,6 +103,7 @@ export const getWeatherLabel = (weatherCode) => {
 };
 
 /**
+ * * Stored in getWeatherSatus file.
  * Retrieves the weather icon corresponding to the given weather status.
  *
  * This function returns a React component for the weather icon based on the provided weather status.
