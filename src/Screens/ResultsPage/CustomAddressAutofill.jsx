@@ -4,15 +4,12 @@ import "./CustomAddressAutofill.css";
 
 // Global variable to store timeout ID for the debounce function
 let timer;
-
 // Debounce function: delays the execution of a function by a specified time (delay)
 const debounce = (callbackFunction, delay) => {
   return (searchedCity) => {
-    // Clear any previously set timeout to reset the delay countdown
     if (timer) clearTimeout(timer);
-    // Set a new timeout to execute the callback after the delay
     timer = setTimeout(() => {
-      callbackFunction(searchedCity); // Call the provided callback function with the searchedCity
+      callbackFunction(searchedCity);
     }, delay);
   };
 };

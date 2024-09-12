@@ -20,32 +20,47 @@
   flex-direction: row;
 }
 
+#current-weather-in-text {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  font-weight: 350;
+  font-family: "Roboto", sans-serif;
+}
+
 #current-weather-city-name {
   padding-bottom: 10px;
   max-height: 90px;
   overflow: hidden;
   color: white;
+  font-weight: 350;
   font-size: 1.5em;
+  font-family: "Roboto", sans-serif;
   text-transform: capitalize;
 }
 
 #temp-loading-text {
-  font-size: 0.5em;
   padding-right: 20px;
   padding-bottom: 10px;
   color: #27ff00;
+  font-size: 0.5em;
 }
 
 #current-time {
   color: white;
+  font-weight: 350;
   font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
 }
 #current-weather-condition-text {
   display: flex;
   justify-content: center;
   color: white;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1em;
+  /* font-weight: 350;  */
+  font-family: "Roboto", sans-serif;
   text-transform: capitalize;
 }
 
@@ -65,8 +80,9 @@
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 3em;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 350;
+  font-size: 4em;
+  font-family: "Roboto", sans-serif;
 }
 
 #fahrenheit-symbol {
@@ -87,7 +103,9 @@
   gap: 5px;
   padding-left: 2px;
   color: rgb(255, 254, 254);
+  font-weight: 350;
   font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
 }
 #humidity-value {
   color: rgb(255, 254, 254);
@@ -131,7 +149,9 @@
   flex-direction: row;
   gap: 5px;
   color: rgb(255, 254, 254);
+  font-weight: 350;
   font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
 }
 
 #wind-mph {
@@ -191,7 +211,9 @@
   flex-direction: row;
   gap: 5px;
   color: rgb(255, 254, 254);
+  font-weight: 350;
   font-size: 1.2em;
+  font-family: "Roboto", sans-serif;
 }
 
 #rain-value {
