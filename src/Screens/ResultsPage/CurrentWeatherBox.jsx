@@ -51,17 +51,18 @@ export const CurrentWeatherBox = ({
           </div>
         </div>
       </div>
+
       <div id="current-weather-bottom-row-container">
         <div id="bottom-current-box">
           <div id="humidity-value-and-percent-container">
             <p id="humidity-value">{formattedHumidity}</p>
             <p id="humidity-percent-sign">%</p>
           </div>
-
           <div id="humidity-icon">
             <WiHumidity />
           </div>
         </div>
+
         <div id="bottom-current-box">
           <div id="wind-value-mph-container">
             {formattedWindSpeed}
@@ -73,12 +74,11 @@ export const CurrentWeatherBox = ({
             </div>
           </div>
         </div>
+
         <div id="bottom-current-box">
-          <div id="rain-value">
-            <div id="rain-value-and-percent-container">
-              {formattedRain}
-              <p id="rain-percent-sign">%</p>
-            </div>
+          <div id="rain-value-and-percent-container">
+            {formattedRain}
+            <p id="rain-percent-sign">%</p>
           </div>
           <div id="rain-icon">
             <SiRainmeter />

@@ -1,5 +1,5 @@
 import { FaSearch } from "react-icons/fa";
-import { CustomAddressAutofill } from "./ResultsPage/CustomAddressAutofill";
+import { CustomAddressAutofill } from "./CustomAddressAutofill";
 import "./SearchCity.css";
 
 /**
