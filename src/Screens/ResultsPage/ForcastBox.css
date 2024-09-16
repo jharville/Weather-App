@@ -1,5 +1,6 @@
 #forcast-box-contents-container {
   padding: 20px;
+  min-width: 270px;
   min-height: 280px;
   max-height: 356px;
 }
@@ -7,7 +8,7 @@
 #contents-gap {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 #forcast-text-and-day-selector-container {
@@ -29,6 +30,7 @@
 
 #day-selector-container {
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -36,14 +38,18 @@
   border-radius: 8px;
   background-color: #133f61fe;
   padding: 7px;
+  max-width: 120px;
+  max-height: 50px;
 }
 
 #day-param-select {
+  flex-direction: row;
   cursor: pointer;
   border-radius: 7px;
   background-color: #afb0b7;
   padding: 4.5px;
-  font-size: 0.5em;
+  max-height: 40px;
+  font-size: 0.4em;
 }
 
 #day-param-select.clicked {
@@ -61,11 +67,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-}
-
-#clickable-days-container :hover {
-  border-radius: 8px;
-  background-color: #1b4d74;
+  padding-top: 5px;
 }
 
 #clickable-forcast-day {
@@ -74,6 +76,11 @@
   justify-content: space-between;
   padding: 5px;
   max-height: 23px;
+}
+
+#clickable-forcast-day:hover {
+  border-radius: 8px;
+  background-color: #1b4d74;
 }
 
 #year-month-day-container {
@@ -125,24 +132,44 @@
   pointer-events: none;
 }
 
+#forcast-days-container.hide-scrollbar {
+  overflow-y: hidden;
+}
+
 #forcast-days-container::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 #forcast-days-container::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: #f1f1f1;
+  background: #545459;
 }
 
 #forcast-days-container::-webkit-scrollbar-thumb {
+  border: solid 1px black;
   border-radius: 10px;
-  background: #253877;
+  background: #03b5f0;
 }
 
 #forcast-days-container::-webkit-scrollbar-thumb:hover {
   cursor: grab;
 }
 
-#forcast-days-container.hide-scrollbar {
-  overflow-y: hidden;
+#loading-icon-forcast-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+}
+
+#error-message-forcast-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  pointer-events: none;
+  font-size: 1em;
+  font-family: fantasy;
 }
