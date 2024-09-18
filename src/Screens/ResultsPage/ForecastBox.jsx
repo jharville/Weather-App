@@ -1,4 +1,4 @@
-import "./ForcastBox.css";
+import "./ForecastBox.css";
 import { getWeatherIcon, getWeatherLabel } from "../getWeatherStatus.jsx";
 import { TbTemperatureFahrenheit } from "react-icons/tb";
 import { useState, useRef } from "react";
@@ -12,11 +12,11 @@ const daySpanOptions = {
 
 const daySpanOptionsArr = Object.values(daySpanOptions);
 
-export const ForcastBox = ({
+export const ForecastBox = ({
   WeatherIcon,
   maxTemp,
   minTemp,
-  forcastDate,
+  forecastDate,
   isLoading,
 }) => {
   const scrollContainerRef = useRef(null);
@@ -34,13 +34,13 @@ export const ForcastBox = ({
   const forecastDaysClass =
     selectedDaySpanOption <= daySpanOptions[7] ? "hide-scrollbar" : "";
 
-  const isValidForecast = forcastDate?.length;
+  const isValidForecast = forecastDate?.length;
 
   return (
-    <div id="forcast-box-contents-container">
+    <div id="forecast-box-contents-container">
       <div id="contents-gap">
-        <div id="forcast-text-and-day-selector-container">
-          <p id="forcast-text">Forecast</p>
+        <div id="forecast-text-and-day-selector-container">
+          <p id="forecast-text">Forecast</p>
           {isValidForecast && (
             <div id="day-selector-container">
               {daySpanOptionsArr.map((option, index) => {
@@ -61,20 +61,20 @@ export const ForcastBox = ({
           )}
         </div>
         <div
-          id="forcast-days-container"
+          id="forecast-days-container"
           className={forecastDaysClass}
           ref={scrollContainerRef}
         >
           <div id="clickable-days-container">
             {isLoading ? (
-              <div id="loading-icon-forcast-box">
+              <div id="loading-icon-forecast-box">
                 <LoadingIcon />
               </div>
             ) : isValidForecast ? (
-              forcastDate
+              forecastDate
                 .slice(0, selectedDaySpanOption)
                 .map((eachIndividualDate, index) => (
-                  <div key={index} id="clickable-forcast-day">
+                  <div key={index} id="clickable-forecast-day">
                     <div id="icon-and-high-low-container">
                       <div id="weather-icon-styling">
                         {getWeatherIcon(getWeatherLabel(WeatherIcon[index]))}
@@ -95,7 +95,7 @@ export const ForcastBox = ({
                   </div>
                 ))
             ) : (
-              <p id="error-message-forcast-box">No Data Available</p>
+              <p id="error-message-forecast-box">No Data Available</p>
             )}
           </div>
         </div>
