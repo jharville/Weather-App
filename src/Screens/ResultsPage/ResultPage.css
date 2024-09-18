@@ -102,7 +102,8 @@
   grid-template-columns: 1fr 3fr;
   gap: 10px;
   background-color: transparent;
-  min-height: 44%;
+  /* min-height: 44%; */
+  max-height: 326px;
 }
 
 #current-weather-box {
@@ -133,17 +134,13 @@
   background-color: transparent;
 }
 
-#humidity-uv-box {
+#uv-box {
   display: flex;
   flex: 0.33;
-  flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
   border-radius: 20px;
   background-color: #437195e6;
-  font-weight: 600;
-  font-size: 2em;
-  text-align: center;
 }
 
 #forecast-box {

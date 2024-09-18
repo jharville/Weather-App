@@ -1,0 +1,94 @@
+#uv-box-contents {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: transparent;
+  padding: 15px;
+}
+
+#uv-text-and-gauge-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: rgb(48, 49, 49);
+  padding: 5px;
+  font-weight: 100;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#uv-index-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#risk-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#condition-info-container {
+  display: flex;
+  flex: 1;
+  gap: 15px;
+  max-height: 120px;
+}
+
+#minutes-and-spf-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  max-width: 160px;
+}
+
+#minutes-to-burn-text {
+  border: 5px solid rgb(62, 73, 79);
+  border-radius: 10px;
+  background-color: rgb(62, 73, 79);
+  padding-left: 4px;
+  max-width: 96px;
+  pointer-events: none;
+
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#spf-text {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  pointer-events: none;
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#precautions {
+  display: flex;
+  flex-shrink: 1;
+  align-items: center;
+  border-radius: 5px;
+  overflow-y: auto;
+  color: rgb(255, 255, 255);
+  font-size: 0.8em;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
