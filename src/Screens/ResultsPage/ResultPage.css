@@ -146,7 +146,7 @@
   text-align: center;
 }
 
-#forcast-box {
+#forecast-box {
   display: flex;
   flex: 0.33;
   flex-direction: column;

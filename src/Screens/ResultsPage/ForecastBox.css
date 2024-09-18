@@ -1,4 +1,4 @@
-#forcast-box-contents-container {
+#forecast-box-contents-container {
   padding: 20px;
   min-width: 270px;
   min-height: 280px;
@@ -11,13 +11,13 @@
   gap: 10px;
 }
 
-#forcast-text-and-day-selector-container {
+#forecast-text-and-day-selector-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-#forcast-text {
+#forecast-text {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@
   color: rgb(240, 232, 232);
 }
 
-#forcast-days-container {
+#forecast-days-container {
   max-height: 230px;
   overflow-y: scroll;
 }
@@ -72,7 +72,7 @@
   padding-top: 5px;
 }
 
-#clickable-forcast-day {
+#clickable-forecast-day {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -80,7 +80,7 @@
   max-height: 23px;
 }
 
-#clickable-forcast-day:hover {
+#clickable-forecast-day:hover {
   border-radius: 8px;
   background-color: #1b4d74;
 }
@@ -134,30 +134,30 @@
   pointer-events: none;
 }
 
-#forcast-days-container.hide-scrollbar {
+#forecast-days-container.hide-scrollbar {
   overflow-y: hidden;
 }
 
-#forcast-days-container::-webkit-scrollbar {
+#forecast-days-container::-webkit-scrollbar {
   width: 10px;
 }
 
-#forcast-days-container::-webkit-scrollbar-track {
+#forecast-days-container::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #545459;
 }
 
-#forcast-days-container::-webkit-scrollbar-thumb {
+#forecast-days-container::-webkit-scrollbar-thumb {
   border: solid 1px black;
   border-radius: 10px;
   background: #03b5f0;
 }
 
-#forcast-days-container::-webkit-scrollbar-thumb:hover {
+#forecast-days-container::-webkit-scrollbar-thumb:hover {
   cursor: grab;
 }
 
-#loading-icon-forcast-box {
+#loading-icon-forecast-box {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -165,7 +165,7 @@
   padding-top: 60px;
 }
 
-#error-message-forcast-box {
+#error-message-forecast-box {
   display: flex;
   flex-direction: column;
   justify-content: center;

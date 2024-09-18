@@ -8,7 +8,7 @@ import { loadingStatuses, useWeatherFetch } from "./useWeatherFetch.js";
 import { CurrentWeatherBox } from "./CurrentWeatherBox.jsx";
 import { FaHome } from "react-icons/fa";
 import { MapDisplay } from "./MapDisplay.jsx";
-import { ForcastBox } from "./ForcastBox.jsx";
+import { ForecastBox } from "./ForecastBox.jsx";
 
 export const ResultPage = () => {
   const [, setSearchParams] = useSearchParams();
@@ -131,13 +131,13 @@ export const ResultPage = () => {
                   </div>
                 </div>
                 <div id="grid-row">
-                  <div id="forcast-box">
+                  <div id="forecast-box">
                     <div>
-                      <ForcastBox
+                      <ForecastBox
                         WeatherIcon={weather?.daily?.weather_code}
                         minTemp={weather?.daily?.temperature_2m_min}
                         maxTemp={weather?.daily?.temperature_2m_max}
-                        forcastDate={weather?.daily?.time}
+                        forecastDate={weather?.daily?.time}
                         isLoading={isLoading}
                       />
                     </div>
