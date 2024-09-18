@@ -4,11 +4,12 @@ import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SearchCity } from "../SearchCity.jsx";
 import { useEffect, useState } from "react";
-import { loadingStatuses, useWeatherFetch } from "./useWeatherFetch.js";
+import { loadingStatuses, useWeatherFetch } from "../useWeatherFetch.js";
 import { CurrentWeatherBox } from "./CurrentWeatherBox.jsx";
 import { FaHome } from "react-icons/fa";
 import { MapDisplay } from "./MapDisplay.jsx";
 import { ForecastBox } from "./ForecastBox.jsx";
+import { UVBox } from "./UVBox.jsx";
 
 export const ResultPage = () => {
   const [, setSearchParams] = useSearchParams();
@@ -67,6 +68,11 @@ export const ResultPage = () => {
     }
   }, [userSearchedCity, fetchWeather]);
 
+  const formattedUV = Math.round(weather?.daily?.uv_index_max[0]);
+
+  console.log(formattedUV, "formattedUV");
+  console.log(Math.round(weather?.daily?.uv_index_max[0]), "Actuall UV");
+
   return (
     <>
       <video autoPlay loop muted id="background-video">
@@ -117,16 +123,8 @@ export const ResultPage = () => {
                     <div id="mapbox-container">
                       <MapDisplay />
                     </div>
-                    <div id="humidity-uv-box">
-                      <div>
-                        <div>
-                          <p>
-                            Humidity:{" "}
-                            {/* {weather?.current?.relative_humidity_2m || "-"} */}
-                          </p>
-                          {/* <p>UV Index: {weather?.current?.uv_index_max || "-"}</p> */}
-                        </div>
-                      </div>
+                    <div id="uv-box">
+                      <UVBox uvValue={formattedUV} />
                     </div>
                   </div>
                 </div>
@@ -143,10 +141,7 @@ export const ResultPage = () => {
                     </div>
                   </div>
                   <div id="summary-box">
-                    <div>
-                      <p>Summary:</p>
-                      <p>Daily Forecast: </p>
-                    </div>
+                    <div></div>
                   </div>
                 </div>
               </div>
