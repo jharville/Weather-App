@@ -10,18 +10,16 @@ import { FaHome } from "react-icons/fa";
 import { MapDisplay } from "./MapDisplay.jsx";
 import { ForecastBox } from "./ForecastBox.jsx";
 import { UVBox } from "./UVBox.jsx";
+import { FormattedDate } from "../FormattedDate";
 
 export const ResultPage = () => {
   const [, setSearchParams] = useSearchParams();
-  const userSearchedCity = new URLSearchParams(window.location.search).get(
-    "city"
-  );
+  const userSearchedCity = new URLSearchParams(window.location.search).get("city");
 
   const [userTextInput, setUserTextInput] = useState("");
   const trimmedInput = userTextInput.trim();
 
-  const { weather, fetchWeather, loadingStatus, weatherFetchError } =
-    useWeatherFetch();
+  const { weather, fetchWeather, loadingStatus, weatherFetchError } = useWeatherFetch();
   const isLoading = loadingStatus === loadingStatuses.loading;
 
   const navigate = useNavigate();
@@ -69,10 +67,9 @@ export const ResultPage = () => {
   }, [userSearchedCity, fetchWeather]);
 
   const formattedUV = Math.round(weather?.daily?.uv_index_max[0]);
+  const formattedSunHours = Math.round(weather?.daily?.sunshine_duration[0] / 3600);
 
-  console.log(formattedUV, "formattedUV");
-  console.log(Math.round(weather?.daily?.uv_index_max[0]), "Actuall UV");
-
+  console.log(weather?.daily?.sunshine_duration[0]);
   return (
     <>
       <video autoPlay loop muted id="background-video">
@@ -108,12 +105,8 @@ export const ResultPage = () => {
                       weatherFetchError={weatherFetchError}
                       newCity={`${city || ""} ${country || ""}`}
                       temperature={Math.round(weather?.current?.temperature_2m)}
-                      generalWeatherCondition={getWeatherLabel(
-                        weather?.current?.weather_code
-                      )}
-                      humidity={Math.round(
-                        weather?.current?.relative_humidity_2m
-                      )}
+                      generalWeatherCondition={getWeatherLabel(weather?.current?.weather_code)}
+                      humidity={Math.round(weather?.current?.relative_humidity_2m)}
                       windSpeed={weather?.current?.wind_speed_10m}
                       rain={Math.round(weather?.current?.rain)}
                       isLoading={isLoading}
@@ -124,7 +117,11 @@ export const ResultPage = () => {
                       <MapDisplay />
                     </div>
                     <div id="uv-box">
-                      <UVBox uvValue={formattedUV} />
+                      <UVBox
+                        uvValue={formattedUV}
+                        isLoading={isLoading}
+                        sunDuration={formattedSunHours}
+                      />
                     </div>
                   </div>
                 </div>
