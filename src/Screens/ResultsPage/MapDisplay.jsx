@@ -14,29 +14,35 @@ export const MapDisplay = () => {
 
   const cityName = searchParams.get("city");
 
-  const fetchCityCoordinates = useCallback(async (cityName) => {
-    try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search?q=${cityName}&format=json&limit=1`
-      );
-      const data = await response.json();
-      if (data.length) {
-        const { lon, lat } = data[0];
-        const coordinates = [parseFloat(lon), parseFloat(lat)];
-        mapRef.current = new mapboxgl.Map({
-          container: mapContainerRef.current,
-          style: "mapbox://styles/mapbox/streets-v11",
-          center: defaultCoordinates, // Default coordinates
-          zoom: 7,
-        });
-        mapRef.current.setCenter(coordinates);
-        return;
+  const fetchCityCoordinates = useCallback(
+    async (cityName) => {
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?q=${cityName}&format=json&limit=1`
+        );
+        const data = await response.json();
+        if (data.length) {
+          const { lon, lat } = data[0];
+          const coordinates = [parseFloat(lon), parseFloat(lat)];
+          if (!mapRef.current) {
+            mapRef.current = new mapboxgl.Map({
+              container: mapContainerRef.current,
+              style: "mapbox://styles/mapbox/streets-v11",
+              center: defaultCoordinates, // Default coordinates
+              zoom: 7,
+            });
+          } else {
+            mapRef.current.setCenter(coordinates);
+          }
+          return;
+        }
+        mapRef.current?.setCenter(defaultCoordinates);
+      } catch (error) {
+        console.error("Error fetching city coordinates:", error);
       }
-      mapRef.current.setCenter(defaultCoordinates);
-    } catch (error) {
-      console.error("Error fetching city coordinates:", error);
-    }
-  }, []);
+    },
+    [mapContainerRef, mapRef, cityName]
+  );
 
   useEffect(() => {
     if (cityName) {

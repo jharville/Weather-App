@@ -1,8 +1,7 @@
 import "./ForecastBox.css";
 import { getWeatherIcon, getWeatherLabel } from "../getWeatherStatus.jsx";
-import { TbTemperatureFahrenheit } from "react-icons/tb";
 import { useState, useRef } from "react";
-import { FormattedDate } from "../FormattedDate.jsx";
+import { format, parseISO } from "date-fns";
 import { LoadingIcon } from "../LoadingIcon.jsx";
 
 const daySpanOptions = {
@@ -10,6 +9,7 @@ const daySpanOptions = {
   14: 14,
 };
 
+// this is just being turned into an array so we can map over it
 const daySpanOptionsArr = Object.values(daySpanOptions);
 
 export const ForecastBox = ({
@@ -18,22 +18,26 @@ export const ForecastBox = ({
   minTemp,
   forecastDate,
   isLoading,
+  dayClicked,
 }) => {
   const scrollContainerRef = useRef(null);
-  const [selectedDaySpanOption, setSelectedDaySpanOption] = useState(
-    daySpanOptions[7]
-  );
+  const [selectedDaySpanOption, setSelectedDaySpanOption] = useState(daySpanOptions[7]);
+  const [currentClickedDayIndex, setCurrentClickedDayIndex] = useState(0);
 
   const handleSelectOption = (selectedOption) => {
     setSelectedDaySpanOption(selectedOption);
+    setCurrentClickedDayIndex(null);
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTop = 0;
     }
   };
 
-  const forecastDaysClass =
-    selectedDaySpanOption <= daySpanOptions[7] ? "hide-scrollbar" : "";
+  const handleDayClick = (index) => {
+    setCurrentClickedDayIndex(index);
+    dayClicked(index);
+  };
 
+  const forecastDaysClass = selectedDaySpanOption <= daySpanOptions[7] ? "hide-scrollbar" : "";
   const isValidForecast = forecastDate?.length;
 
   return (
@@ -45,12 +49,12 @@ export const ForecastBox = ({
             <div id="day-selector-container">
               {daySpanOptionsArr.map((option, index) => {
                 const isSelected = selectedDaySpanOption === option;
-                const label = option === 1 ? `${option} Day` : `${option} Day`;
+                const label = `${option} Day`;
                 return (
                   <button
                     key={index}
                     id="day-param-select"
-                    className={isSelected && "clicked"}
+                    className={isSelected ? "clicked" : ""}
                     onClick={() => handleSelectOption(option)}
                   >
                     <p>{label}</p>
@@ -60,40 +64,35 @@ export const ForecastBox = ({
             </div>
           )}
         </div>
-        <div
-          id="forecast-days-container"
-          className={forecastDaysClass}
-          ref={scrollContainerRef}
-        >
+        <div id="forecast-days-container" className={forecastDaysClass} ref={scrollContainerRef}>
           <div id="clickable-days-container">
             {isLoading ? (
               <div id="loading-icon-forecast-box">
                 <LoadingIcon />
               </div>
             ) : isValidForecast ? (
-              forecastDate
-                .slice(0, selectedDaySpanOption)
-                .map((eachIndividualDate, index) => (
-                  <div key={index} id="clickable-forecast-day">
-                    <div id="icon-and-high-low-container">
-                      <div id="weather-icon-styling">
-                        {getWeatherIcon(getWeatherLabel(WeatherIcon[index]))}
-                      </div>
-                      <div id="temp-high-low-and-f-symbol">
-                        <p id="temp-high-low-styling">
-                          {Math.round(minTemp[index])} /{" "}
-                          {Math.round(maxTemp[index])}
-                        </p>
-                        <div id="fahrenheit-symbol">
-                          <TbTemperatureFahrenheit />
-                        </div>
-                      </div>
+              forecastDate.slice(0, selectedDaySpanOption).map((eachIndividualDate, index) => (
+                <div
+                  key={index}
+                  id="clickable-forecast-day"
+                  className={currentClickedDayIndex === index ? "dayClicked" : ""}
+                  onClick={() => handleDayClick(index)}
+                >
+                  <div id="icon-and-high-low-container">
+                    <div id="weather-icon-styling">
+                      {getWeatherIcon(getWeatherLabel(WeatherIcon[index]))}
                     </div>
-                    <div id="year-month-day-container">
-                      <FormattedDate acceptedDate={eachIndividualDate} />
+                    <div id="temp-high-low-and-f-symbol">
+                      <p id="temp-high-low-styling">
+                        {Math.round(minTemp[index])} / {Math.round(maxTemp[index]) + ` \u00B0F`}
+                      </p>
                     </div>
                   </div>
-                ))
+                  <div id="year-month-day-container">
+                    {format(parseISO(eachIndividualDate), "EEE, MMM do")}
+                  </div>
+                </div>
+              ))
             ) : (
               <p id="error-message-forecast-box">No Data Available</p>
             )}
