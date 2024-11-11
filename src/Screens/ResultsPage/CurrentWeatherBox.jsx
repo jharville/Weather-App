@@ -4,7 +4,6 @@ import { WiHumidity } from "react-icons/wi";
 import { FaWind } from "react-icons/fa";
 import { SiRainmeter } from "react-icons/si";
 import { CurrentTime } from "./CurrentTime";
-import { TbTemperatureFahrenheit } from "react-icons/tb";
 
 export const CurrentWeatherBox = ({
   temperature,
@@ -41,9 +40,7 @@ export const CurrentWeatherBox = ({
               ) : (
                 <div id="temp-and-fahrenheit-box">
                   {temperature}
-                  <div id="fahrenheit-symbol">
-                    <TbTemperatureFahrenheit />
-                  </div>
+                  <p id="fahrenheit-symbol">{`\u00B0F`}</p>
                 </div>
               )}
             </h1>

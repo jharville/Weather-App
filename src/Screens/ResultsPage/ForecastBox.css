@@ -24,8 +24,8 @@
   pointer-events: none;
   color: rgb(255, 255, 255);
   font-size: 0.8em;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
+    Verdana, sans-serif;
 }
 
 #day-selector-container {
@@ -69,7 +69,6 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  padding-top: 5px;
 }
 
 #clickable-forecast-day {
@@ -82,7 +81,12 @@
 
 #clickable-forecast-day:hover {
   border-radius: 8px;
-  background-color: #1b4d74;
+  background-color: #ffffff2a;
+}
+
+#clickable-forecast-day.dayClicked {
+  border-radius: 8px;
+  background-color: #163f5e;
 }
 
 #year-month-day-container {
