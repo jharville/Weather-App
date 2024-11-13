@@ -4,37 +4,47 @@
   width: 100%;
   height: 100%;
 }
+#chart-hard-stop {
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, #2e3192 30%, rgba(255, 253, 253, 0) 70%);
+}
 
 #victory-chart-container {
   position: relative;
-  flex-shrink: 0;
   z-index: 1;
   cursor: grab;
   border-radius: 20px;
-  /* width: 100%; */
-  /* height: 100%; */
-  /* min-width: 1500px; */
-  /* max-width: 1500px; */
+  height: 100%;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
+  touch-action: none;
   font-family: "Roboto", sans-serif;
 }
 
-#text-and-options-container {
+#text-icon-options-container {
   display: flex;
   position: relative;
   flex: 1;
   justify-content: space-between;
+  gap: 5px;
   z-index: 10;
+  cursor: default;
   border-radius: 5px;
   padding: 18px;
 }
 
+#summary-and-icon-container {
+  display: flex;
+  gap: 10px;
+}
+
 #summary-text {
+  padding-top: 10px;
   color: white;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.6em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
     Verdana, sans-serif;
 }
@@ -48,16 +58,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 3px;
+  gap: 4px;
   border-radius: 7px;
   background-color: #133f61fe;
   padding: 5px;
-  padding-right: 3px;
-  padding-left: 3px;
-  width: 170px;
+  padding-right: 4px;
+  padding-left: 4px;
+  width: 120px;
 }
 
 #button {
+  cursor: pointer;
   border-radius: 6px;
   background-color: #afb0b7;
   padding: 2.5px;
@@ -65,7 +76,7 @@
 }
 
 #button.clicked {
-  cursor: default;
+  cursor: not-allowed;
   background-color: #196cf1;
   color: rgb(240, 232, 232);
 }
@@ -76,4 +87,68 @@
   justify-content: center;
   align-items: center;
   padding-top: 60px;
+}
+
+/* #custom-tick-labels {
+  z-index: 99;
+} */
+
+#icon-and-label-container {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  cursor: help;
+  box-shadow: 0 0 0 1px rgb(13, 13, 13);
+  border: solid 5px #03b5f0;
+  border-radius: 50px;
+  background-color: rgb(67, 63, 63);
+  padding: 10px;
+  height: 25px;
+}
+
+#popup-menu {
+  word-wrap: break-word;
+  position: absolute;
+  top: 65px;
+  left: 18px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 100;
+  transition: opacity 0.4s ease, visibility 0.2s ease;
+  box-shadow: 0 4px 8px rgba(1, 1, 1, 0.742);
+  border: solid 2px #03b5f0;
+  border-radius: 8px;
+  background-color: #333;
+  padding: 8px;
+  width: 102px;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
+    Verdana, sans-serif;
+  hyphens: auto;
+  text-align: left;
+}
+
+#icon-and-label-container:hover #popup-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+#selected-weather-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+#selected-weather-label {
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva,
+    Verdana, sans-serif;
+  text-transform: capitalize;
+  white-space: nowrap;
 }

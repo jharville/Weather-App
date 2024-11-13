@@ -34,13 +34,16 @@
 
 #current-weather-city-name {
   padding-bottom: 10px;
+  max-width: 260px;
   max-height: 90px;
-  overflow: hidden;
+  overflow-x: hidden;
   color: white;
   font-weight: 350;
   font-size: 1.5em;
   font-family: "Roboto", sans-serif;
+  text-overflow: ellipsis;
   text-transform: capitalize;
+  white-space: nowrap;
 }
 
 #temp-loading-text {
@@ -95,6 +98,7 @@
 }
 
 #fahrenheit-symbol {
+  padding-top: 5px;
   color: white;
   font-size: 1em;
 }

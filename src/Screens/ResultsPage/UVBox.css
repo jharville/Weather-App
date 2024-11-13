@@ -118,6 +118,7 @@
 #precautions {
   display: block;
   align-items: center;
+  cursor: default;
   border: 3px solid rgb(144, 21, 221);
   border-radius: 7px;
   background-color: rgb(62, 73, 79);

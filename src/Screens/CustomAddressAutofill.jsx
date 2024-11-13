@@ -32,20 +32,20 @@ export const CustomAddressAutofill = ({
           setSuggestions(response.data);
         } catch (error) {
           console.error("Error Fetching Suggestions:", error);
-          setSuggestions([]); // hide suggestions on error
+          setSuggestions([]); // hides suggestions on error
         }
       }
       if (!searchedCity.trim()) {
         return setSuggestions([]);
       }
     };
-    // wait 600 ms before suggestions are fetched
+    // waits 600 ms before suggestions are fetched
     const debouncedFetchSuggestions = debounce(fetchSuggestions, 500);
 
-    // invoking the debounced function
+    // invokes the debounced function
     debouncedFetchSuggestions(searchedCity);
 
-    //clean up the debounce
+    //cleans up the debounce
     return () => clearTimeout(timer);
   }, [searchedCity]);
 
@@ -65,7 +65,6 @@ export const CustomAddressAutofill = ({
     }
   }, [onNotSuggestionSubmit]);
 
-  // console.log(suggestions);
   return (
     <div>
       {children}
@@ -73,10 +72,7 @@ export const CustomAddressAutofill = ({
         <div id="custom-address-autofill-result">
           <ul>
             {suggestions.slice(0, 3).map((city) => (
-              <li
-                key={city.place_id}
-                onClick={() => handleSuggestionClick(city)}
-              >
+              <li key={city.place_id} onClick={() => handleSuggestionClick(city)}>
                 {city.display_name}
               </li>
             ))}

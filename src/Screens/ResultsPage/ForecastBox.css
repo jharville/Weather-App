@@ -55,7 +55,7 @@
 }
 
 #day-param-select.clicked {
-  cursor: default;
+  cursor: not-allowed;
   background-color: #196cf1;
   color: rgb(240, 232, 232);
 }

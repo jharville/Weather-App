@@ -28,7 +28,7 @@ export const weatherStatuses = {
   rainingHeavy: "Heavy Rain",
   freezingRainLight: "Light Freezing Rain",
   freezingRainHeavy: "Heavy Freezing Rain",
-  snowFallLight: "Light Snowing Fall",
+  snowFallLight: "Light Snow Fall",
   snowFallModerate: "Moderate Snow Fall",
   snowFallHeavy: "Heavy Snow Fall",
   snowShowersLight: "Light Snow Showers",
@@ -114,19 +114,19 @@ export const getWeatherIcon = (status) => {
 
   switch (status) {
     case weatherStatuses.clear:
-      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={75} style={iconStyles} />;
     case weatherStatuses.mainlyClear:
-      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={75} style={iconStyles} />;
     case weatherStatuses.partlyCloudy:
-      return <CiCloudSun color="white" size={80} style={iconStyles} />;
+      return <CiCloudSun color="white" size={90} style={iconStyles} />;
     case weatherStatuses.overcast:
-      return <BsClouds color="white" size={80} style={iconStyles} />;
+      return <BsClouds color="white" size={68} style={iconStyles} />;
     case weatherStatuses.foggy:
       return <BsCloudFog2 color="goldenrod" size={79} style={iconStyles} />;
     case weatherStatuses.drizzlingLightly:
-      return <PiCloudRain color="white" size={80} style={iconStyles} />;
+      return <PiCloudRain color="white" size={79} style={iconStyles} />;
     case weatherStatuses.drizzlingModeratly:
-      return <PiCloudRain color="white" size={80} style={iconStyles} />;
+      return <PiCloudRain color="white" size={79} style={iconStyles} />;
     case weatherStatuses.drizzlingDense:
       return <PiCloudRainBold color="white" size={90} style={iconStyles} />;
     case weatherStatuses.drizzlingFreezingLight:
@@ -134,40 +134,45 @@ export const getWeatherIcon = (status) => {
     case weatherStatuses.drizzlingFreezingDense:
       return <WiDayCloudy color="white" size={90} style={iconStyles} />;
     case weatherStatuses.rainingLight:
-      return <BsFillCloudRainHeavyFill color="white" size={75} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainingModerate:
-      return <BsFillCloudRainHeavyFill color="white" size={75} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainingHeavy:
-      return <BsFillCloudRainHeavyFill color="black" size={75} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="#A0A0A0" size={35} style={iconStyles} />;
     case weatherStatuses.freezingRainLight:
       return <BsCloudRainHeavyFill size={90} style={iconStyles} />;
     case weatherStatuses.freezingRainHeavy:
       return <BsCloudRainHeavyFill size={90} style={iconStyles} />;
     case weatherStatuses.snowFallLight:
-      return <BsCloudSnow color="white" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowFallModerate:
-      return <BsCloudSnow color="white" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowFallHeavy:
-      return <BsCloudSnow color="white" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowGrains:
       return <FaRegSnowflake color="white" size={90} style={iconStyles} />;
     case weatherStatuses.rainShowersLight:
-      return <BsFillCloudRainHeavyFill color="white" size={90} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainShowersModerate:
-      return <BsFillCloudRainHeavyFill color="white" size={90} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainShowersViolent:
-      return <BsFillCloudRainHeavyFill color="black" size={90} style={iconStyles} />;
+      return <BsFillCloudRainHeavyFill color="black" size={35} style={iconStyles} />;
     case weatherStatuses.snowShowersLight:
-      return <BsCloudSnow color="white" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowShowersHeavy:
-      return <BsCloudSnow color="black" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="#A0A0A0" size={90} style={iconStyles} />;
     case weatherStatuses.thunderstorms:
-      return <BsCloudLightningRain color="white" size={90} style={iconStyles} />;
+      return <BsCloudLightningRain color="white" size={35} style={iconStyles} />;
     case weatherStatuses.thunderstormsLightHail:
       return <BsCloudLightningRainFill color="white" size={90} style={iconStyles} />;
     case weatherStatuses.thunderstormsHeavyHail:
-      return <BsCloudLightningRainFill color="black" size={90} style={iconStyles} />;
+      return <BsCloudLightningRainFill color="#A0A0A0" size={90} style={iconStyles} />;
     default:
-      return <FaSun color="goldenrod" size={79} style={iconStyles} />;
+      return (
+        <div>
+          <p>I'm the default</p>
+          <FaSun color="goldenrod" size={75} style={iconStyles} />
+        </div>
+      );
   }
 };
