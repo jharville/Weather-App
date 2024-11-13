@@ -48,11 +48,6 @@
   font-size: 1em;
 }
 
-#side-bar-icon {
-  padding-left: 5px;
-  font-size: 1em;
-}
-
 #side-bar-home-icon {
   justify-content: center;
   align-items: center;
@@ -97,9 +92,11 @@
   gap: 10px;
 }
 
+/* this one causes the summary victory chart resize issue */
 #grid-row {
   display: grid;
   grid-template-columns: 1fr 3fr;
+
   gap: 10px;
   background-color: transparent;
   min-height: 320px;
@@ -115,6 +112,7 @@
   border-color: #000000;
   border-radius: 20px;
   background-color: #235d89fe;
+  max-height: 326px;
   font-weight: 600;
 }
 
@@ -132,6 +130,7 @@
   flex: 1;
   flex-direction: column;
   background-color: transparent;
+  max-height: 326px;
 }
 
 #uv-box {
@@ -141,6 +140,7 @@
   box-sizing: border-box;
   border-radius: 20px;
   background-color: #437195e6;
+  max-height: 326px;
 }
 
 #forecast-box {
@@ -152,14 +152,13 @@
   border-radius: 20px;
   background-color: #437195e6;
   min-height: 300px;
-  max-height: 356px;
+  max-height: 326px;
   font-weight: 600;
   font-size: 2em;
   text-align: center;
 }
 
 #summary-box {
-  /* display: flex; */
   border-radius: 20px;
   background-color: #437195e6;
 }

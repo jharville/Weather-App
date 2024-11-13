@@ -5,7 +5,11 @@ import { FaWind } from "react-icons/fa";
 import { SiRainmeter } from "react-icons/si";
 import { CurrentTime } from "./CurrentTime";
 
+// "-" is given to props as a default value to ensure a fallback
 export const CurrentWeatherBox = ({
+  isLoading,
+  isLoadingDone,
+  isLoadingRejected,
   temperature,
   humidity = "-",
   rain = "-",
@@ -13,11 +17,13 @@ export const CurrentWeatherBox = ({
   newCity,
   weatherFetchError,
   generalWeatherCondition,
-  isLoading,
 }) => {
-  const formattedHumidity = humidity === 0 ? humidity : humidity || "-";
-  const formattedWindSpeed = windSpeed === 0 ? windSpeed : windSpeed || "-";
-  const formattedRain = rain === 0 ? rain : rain || "-";
+  const formattedHumidity = humidity === 0 ? humidity : humidity || null;
+  const formattedWindSpeed = windSpeed === 0 ? windSpeed : windSpeed || null;
+  const formattedRain = rain === 0 ? rain : rain || null;
+  const formattedTemperature = temperature === 0 ? temperature : temperature || null;
+  const generalWeatherIcon =
+    isLoadingDone && !isLoadingRejected ? getWeatherIcon(generalWeatherCondition) : null;
 
   return weatherFetchError ? (
     <div id="error-message-current-box">{weatherFetchError}</div>
@@ -31,7 +37,7 @@ export const CurrentWeatherBox = ({
         </div>
       </div>
       <div id="current-weather-middle-row-container">
-        {getWeatherIcon(generalWeatherCondition)}
+        {generalWeatherIcon}
         <div id="current-weather-temp-container">
           <div>
             <h1 id="temp">
@@ -39,7 +45,7 @@ export const CurrentWeatherBox = ({
                 <p id="temp-loading-text">Loading...</p>
               ) : (
                 <div id="temp-and-fahrenheit-box">
-                  {temperature}
+                  {formattedTemperature}
                   <p id="fahrenheit-symbol">{`\u00B0F`}</p>
                 </div>
               )}

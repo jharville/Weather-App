@@ -7,7 +7,7 @@ mapboxgl.accessToken = `pk.eyJ1Ijoiam9zZXBoaGFydmlsbGU5NiIsImEiOiJjbTBiZnd1OHEwM
 
 const defaultCoordinates = [-74.5, 40];
 
-export const MapDisplay = () => {
+export const MapDisplay = (isLoading) => {
   const [searchParams] = useSearchParams();
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
