@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 import "./MapDisplay.css";
 
@@ -7,18 +6,15 @@ mapboxgl.accessToken = `pk.eyJ1Ijoiam9zZXBoaGFydmlsbGU5NiIsImEiOiJjbTBiZnd1OHEwM
 
 const defaultCoordinates = [-74.5, 40];
 
-export const MapDisplay = (isLoading) => {
-  const [searchParams] = useSearchParams();
+export const MapDisplay = ({ userSearchedCity, isLoadingDone }) => {
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
 
-  const cityName = searchParams.get("city");
-
   const fetchCityCoordinates = useCallback(
-    async (cityName) => {
+    async (userSearchedCity) => {
       try {
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/search?q=${cityName}&format=json&limit=1`
+          `https://nominatim.openstreetmap.org/search?q=${userSearchedCity}&format=json&limit=1`
         );
         const data = await response.json();
         if (data.length) {
@@ -28,27 +24,28 @@ export const MapDisplay = (isLoading) => {
             mapRef.current = new mapboxgl.Map({
               container: mapContainerRef.current,
               style: "mapbox://styles/mapbox/streets-v11",
-              center: defaultCoordinates, // Default coordinates
+              center: defaultCoordinates,
               zoom: 7,
             });
           } else {
             mapRef.current.setCenter(coordinates);
           }
-          return;
+        } else {
+          mapRef.current?.setCenter(defaultCoordinates);
         }
-        mapRef.current?.setCenter(defaultCoordinates);
       } catch (error) {
-        console.error("Error fetching city coordinates:", error);
+        console.error("Error from MapDisplay fetching city coordinates:", error);
+      } finally {
       }
     },
-    [mapContainerRef, mapRef, cityName]
+    [userSearchedCity]
   );
 
   useEffect(() => {
-    if (cityName) {
-      fetchCityCoordinates(cityName);
+    if (userSearchedCity) {
+      fetchCityCoordinates(userSearchedCity);
     }
-  }, [searchParams, cityName, fetchCityCoordinates]);
+  }, [userSearchedCity]);
 
   return (
     <div ref={mapContainerRef} className="mapbox-component">

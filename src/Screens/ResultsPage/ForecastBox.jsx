@@ -16,7 +16,7 @@ export const ForecastBox = ({
   WeatherIcon,
   maxTemp,
   minTemp,
-  forecastDate,
+  forecastDates,
   isLoading,
   dayClicked,
 }) => {
@@ -38,7 +38,7 @@ export const ForecastBox = ({
   };
 
   const forecastDaysClass = selectedDaySpanOption <= daySpanOptions[7] ? "hide-scrollbar" : "";
-  const isValidForecast = forecastDate?.length;
+  const isValidForecast = !!forecastDates?.length;
 
   return (
     <div id="forecast-box-contents-container">
@@ -71,7 +71,7 @@ export const ForecastBox = ({
                 <LoadingIcon />
               </div>
             ) : isValidForecast ? (
-              forecastDate.slice(0, selectedDaySpanOption).map((eachIndividualDate, index) => (
+              forecastDates.slice(0, selectedDaySpanOption).map((eachIndividualDate, index) => (
                 <div
                   key={index}
                   id="clickable-forecast-day"
