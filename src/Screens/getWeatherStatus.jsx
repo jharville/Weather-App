@@ -150,7 +150,7 @@ export const getWeatherIcon = (status) => {
     case weatherStatuses.snowFallHeavy:
       return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowGrains:
-      return <FaRegSnowflake color="white" size={90} style={iconStyles} />;
+      return <FaRegSnowflake color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainShowersLight:
       return <BsFillCloudRainHeavyFill color="white" size={35} style={iconStyles} />;
     case weatherStatuses.rainShowersModerate:
@@ -160,7 +160,7 @@ export const getWeatherIcon = (status) => {
     case weatherStatuses.snowShowersLight:
       return <BsCloudSnow color="white" size={60} style={iconStyles} />;
     case weatherStatuses.snowShowersHeavy:
-      return <BsCloudSnow color="#A0A0A0" size={90} style={iconStyles} />;
+      return <BsCloudSnow color="#A0A0A0" size={60} style={iconStyles} />;
     case weatherStatuses.thunderstorms:
       return <BsCloudLightningRain color="white" size={35} style={iconStyles} />;
     case weatherStatuses.thunderstormsLightHail:

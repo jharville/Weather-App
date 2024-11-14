@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import axios from "axios";
 
 export const loadingStatuses = {
@@ -63,11 +63,9 @@ export const useWeatherFetch = () => {
         setLoadingStatus(loadingStatuses.rejected);
         isRejected = true;
       } finally {
-        if (isRejected) {
-          return;
+        if (!isRejected) {
+          setLoadingStatus(loadingStatuses.fulfilled);
         }
-
-        setLoadingStatus(loadingStatuses.fulfilled);
       }
     },
     [isRejected]

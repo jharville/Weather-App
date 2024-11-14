@@ -18,12 +18,11 @@ export const CurrentWeatherBox = ({
   weatherFetchError,
   generalWeatherCondition,
 }) => {
-  const formattedHumidity = humidity === 0 ? humidity : humidity || null;
-  const formattedWindSpeed = windSpeed === 0 ? windSpeed : windSpeed || null;
-  const formattedRain = rain === 0 ? rain : rain || null;
-  const formattedTemperature = temperature === 0 ? temperature : temperature || null;
-  const generalWeatherIcon =
-    isLoadingDone && !isLoadingRejected ? getWeatherIcon(generalWeatherCondition) : null;
+  const formattedHumidity = humidity ? humidity : null;
+  const formattedWindSpeed = windSpeed ? windSpeed : null;
+  const formattedRain = rain ? rain : null;
+  const formattedTemperature = temperature ? temperature : null;
+  const generalWeatherIcon = isLoadingDone ? getWeatherIcon(generalWeatherCondition) : null;
 
   return weatherFetchError ? (
     <div id="error-message-current-box">{weatherFetchError}</div>

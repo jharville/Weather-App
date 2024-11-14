@@ -120,7 +120,10 @@ export const ResultPage = () => {
                   </div>
                   <div id="map-and-uv-container">
                     <div id="mapbox-container">
-                      <MapDisplay />
+                      <MapDisplay
+                        userSearchedCity={userSearchedCity}
+                        isLoadingDone={isLoadingDone}
+                      />
                     </div>
                     <div id="uv-box">
                       <UVBox
@@ -138,7 +141,7 @@ export const ResultPage = () => {
                         WeatherIcon={weather?.daily?.weather_code}
                         minTemp={weather?.daily?.temperature_2m_min}
                         maxTemp={weather?.daily?.temperature_2m_max}
-                        forecastDate={weather?.daily?.time}
+                        forecastDates={weather?.daily?.time}
                         isLoading={isLoading}
                         dayClicked={handleDayClick}
                       />
@@ -147,7 +150,7 @@ export const ResultPage = () => {
                   <div id="summary-box">
                     <SummaryChart
                       isLoading={isLoading}
-                      loadingDone={isLoadingDone}
+                      isLoadingDone={isLoadingDone}
                       isLoadingRejected={isLoadingRejected}
                       temps={weather?.hourly?.temperature_2m}
                       rain={weather?.hourly?.precipitation_probability}
@@ -166,104 +169,3 @@ export const ResultPage = () => {
     </>
   );
 };
-
-// import "./ResultPage.css";
-// import { getWeatherLabel } from "../getWeatherStatus.jsx";
-// import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.mov";
-// import { useNavigate, useSearchParams } from "react-router-dom";
-// import { SearchCity } from "../SearchCity.jsx";
-// import { useEffect, useState } from "react";
-// import { loadingStatuses, useWeatherFetch } from "../useWeatherFetch.js";
-// import { CurrentWeatherBox } from "./CurrentWeatherBox.jsx";
-// import { FaHome } from "react-icons/fa";
-// import { MapDisplay } from "./MapDisplay.jsx";
-// import { ForecastBox } from "./ForecastBox.jsx";
-// import { UVBox } from "./UVBox.jsx";
-// import { SummaryChart } from "./SummaryChart.jsx";
-// import { Foo } from "./Foo.jsx";
-
-// export const ResultPage = () => {
-//   const [, setSearchParams] = useSearchParams();
-
-//   const userSearchedCity = new URLSearchParams(window.location.search).get("city");
-
-//   const [userTextInput, setUserTextInput] = useState("");
-//   const trimmedInput = userTextInput.trim();
-
-//   const { weather, fetchWeather, loadingStatus, weatherFetchError } = useWeatherFetch();
-//   const isLoading = loadingStatus === loadingStatuses.loading;
-
-//   // sets the initial highlighted forecast date
-//   const [dayClickedIndex, setDayClickedIndex] = useState(0);
-//   const handleDayClick = (index) => {
-//     setDayClickedIndex(index);
-//   };
-
-//   const navigate = useNavigate();
-//   const handleHomeClick = () => {
-//     navigate("/");
-//   };
-
-//   const handleSearchSubmit = (event) => {
-//     event.preventDefault();
-//     setUserTextInput("");
-//     setSearchParams({ city: trimmedInput });
-//   };
-
-//   const handleEnterPressSubmit = (event) => {
-//     if (event.key === "Enter") {
-//       event.preventDefault();
-//       setUserTextInput("");
-//       setSearchParams({ city: trimmedInput });
-//       handleSearchSubmit(event);
-//     }
-//   };
-
-//   const handleSuggestionClick = (city) => {
-//     const cityName = city.display_name;
-//     setUserTextInput("");
-//     setSearchParams({ city: cityName });
-//   };
-
-//   //For displaying only the city and country/city returned from the autofill.
-//   const [city, country] = (() => {
-//     const parts = userSearchedCity.split(",").map((part) => part.trim());
-//     if (parts.length === 1) {
-//       return [parts[0]]; // If there is only one part, it's assumed to be the city, with no country.
-//     } else if (parts.length > 2) {
-//       return [parts[0], parts[2]]; // If there are more than two parts, the third part is considered the country.
-//     } else {
-//       return [parts[0], parts[1]]; // If there are exactly two parts, the second part is considered the country or state.
-//     }
-//   })();
-
-//   useEffect(() => {
-//     if (userSearchedCity) {
-//       fetchWeather(userSearchedCity);
-//     }
-//   }, [userSearchedCity, fetchWeather]);
-
-//   const formattedUV = Math.round(weather?.daily?.uv_index_max[0]);
-//   const formattedSunHours = Math.round(weather?.daily?.sunshine_duration[0] / 3600);
-
-//   const objsWithComponent = [
-//     { title: "foo", component: () => <Foo /> },
-//     { title: "foo", component: () => <Foo /> },
-//     { title: "foo", component: () => <Foo /> },
-//     { title: "foo", component: () => <Foo /> },
-//   ];
-
-//   return (
-//     <>
-//       <video autoPlay loop muted id="background-video">
-//         <source src={BackgroundVideo} type="video/mp4" />
-//       </video>
-//       <div id="for-centering-contents">
-//         {objsWithComponent.map((obj) => {
-//           return obj.component();
-//         })}
-//         {/* <Foo /> */}
-//       </div>
-//     </>
-//   );
-// };
