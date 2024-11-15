@@ -24,6 +24,35 @@ const victoryChartPadding = { top: 0, bottom: -2, left: -7.5, right: -50 };
 const victoryChartWidth = 1500;
 const yAxisCenter = 260; // Midpoint for the VictoryChart y-axis
 
+const TempWaveGradient = () => (
+  <defs>
+    <linearGradient id="tempWaveGradient" x1="0%" y1="130%" x2="0%" y2="0%">
+      <stop offset="50%" style={{ stopColor: "#2E3192", stopOpacity: 0.5 }} />
+      <stop offset="68%" style={{ stopColor: "#1BFFFF", stopOpacity: 0.6 }} />
+      <stop offset="95%" style={{ stopColor: "#ff8d00", stopOpacity: 0.7 }} />
+      <stop offset="100%" style={{ stopColor: "red", stopOpacity: 0.8 }} />
+    </linearGradient>
+  </defs>
+);
+
+const victoryAreaGradientStyling = {
+  data: { fill: "url(#tempWaveGradient)" },
+};
+
+const tempsStyling = { fill: "white", fontSize: 30, fontFamily: "Roboto, sans-serif" };
+
+const rainAxisStyling = {
+  tickLabels: { fill: "#FFFFFF", fontSize: 27, fontFamily: "Roboto, sans-serif" },
+};
+
+const timeAxisStyling = {
+  tickLabels: {
+    fill: "#FFFFFF",
+    fontSize: 27,
+    fontFamily: "Roboto, sans-serif",
+  },
+};
+
 const returnEvenIndex = (index) => index % 2 === 0;
 
 const formatIndex = (index) => {
@@ -266,35 +295,6 @@ export const SummaryChart = ({
 
   const tempLabelText = ({ datum, index }) =>
     index !== 0 ? `${datum.temp} \u00B0F` : `${datum.temp}`;
-
-  const victoryAreaGradientStyling = {
-    data: { fill: "url(#tempWaveGradient)" },
-  };
-
-  const tempsStyling = { fill: "white", fontSize: 30, fontFamily: "Roboto, sans-serif" };
-
-  const rainAxisStyling = {
-    tickLabels: { fill: "#FFFFFF", fontSize: 27, fontFamily: "Roboto, sans-serif" },
-  };
-
-  const timeAxisStyling = {
-    tickLabels: {
-      fill: "#FFFFFF",
-      fontSize: 27,
-      fontFamily: "Roboto, sans-serif",
-    },
-  };
-
-  const TempWaveGradient = () => (
-    <defs>
-      <linearGradient id="tempWaveGradient" x1="0%" y1="130%" x2="0%" y2="0%">
-        <stop offset="50%" style={{ stopColor: "#2E3192", stopOpacity: 0.5 }} />
-        <stop offset="68%" style={{ stopColor: "#1BFFFF", stopOpacity: 0.6 }} />
-        <stop offset="95%" style={{ stopColor: "#ff8d00", stopOpacity: 0.7 }} />
-        <stop offset="100%" style={{ stopColor: "red", stopOpacity: 0.8 }} />
-      </linearGradient>
-    </defs>
-  );
 
   return (
     <div id="summary-container-total">
