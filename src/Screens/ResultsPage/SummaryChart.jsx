@@ -145,39 +145,6 @@ export const SummaryChart = ({
     { time: summaryBoxDateNext(), chance: "Next Day" },
   ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
 
-  const totalWeatherCodes = (weathercodes || [])
-    .slice(0, 24)
-    .map((code, index) => {
-      return { time: formatIndex(index), code: code };
-    })
-    .filter((item) => item != null);
-
-  const evenWeatherCodes = (weathercodes || [])
-    .slice(0, 24)
-    .map((code, index) => {
-      return returnEvenIndex(index)
-        ? {
-            time: formatIndex(index),
-            code: getWeatherIcon(getWeatherLabel(code)),
-          }
-        : null;
-    })
-    .filter((item) => item != null);
-
-  const summaryWeatherCodesArray = [
-    { time: "a", code: "" },
-    { time: summaryBoxDate, code: "" },
-    ...evenWeatherCodes,
-    { time: "Next Day", code: "" },
-  ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
-
-  const hourlyWeatherCodesArray = [
-    { time: "a", code: "" },
-    { time: summaryBoxDate, code: "" },
-    ...totalWeatherCodes,
-    { time: "Next Day", code: "" },
-  ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
-
   const handleButtonClick = (buttonKey) => {
     setSelectedOption(buttonKey);
   };
@@ -451,6 +418,39 @@ export const SummaryChart = ({
 //     return [];
 //   }
 // };
+
+// const totalWeatherCodes = (weathercodes || [])
+//     .slice(0, 24)
+//     .map((code, index) => {
+//       return { time: formatIndex(index), code: code };
+//     })
+//     .filter((item) => item != null);
+
+//   const evenWeatherCodes = (weathercodes || [])
+//     .slice(0, 24)
+//     .map((code, index) => {
+//       return returnEvenIndex(index)
+//         ? {
+//             time: formatIndex(index),
+//             code: getWeatherIcon(getWeatherLabel(code)),
+//           }
+//         : null;
+//     })
+//     .filter((item) => item != null);
+
+// const summaryWeatherCodesArray = [
+//   { time: "a", code: "" },
+//   { time: summaryBoxDate, code: "" },
+//   ...evenWeatherCodes,
+//   { time: "Next Day", code: "" },
+// ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
+
+// const hourlyWeatherCodesArray = [
+//   { time: "a", code: "" },
+//   { time: summaryBoxDate, code: "" },
+//   ...totalWeatherCodes,
+//   { time: "Next Day", code: "" },
+// ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
 
 // DO NOT DELETE THESE COMMENTS
 // The [object Object] issue occurs because the tickFormat function
