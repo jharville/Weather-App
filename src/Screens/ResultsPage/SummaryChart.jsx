@@ -135,7 +135,7 @@ export const SummaryChart = ({
     { time: "a", chance: "" },
     { time: summaryBoxDate, chance: "Rain Chance" },
     ...evenRainChances,
-    { time: summaryBoxDateNext(), chance: "NextDay" },
+    { time: summaryBoxDateNext(), chance: "Next Day" },
   ]; // This is to add "a" (invisible), summaryDate, and Next Day, to the array.
 
   const hourlyRainChanceArray = [
