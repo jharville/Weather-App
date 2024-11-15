@@ -114,9 +114,9 @@ export const getWeatherIcon = (status) => {
 
   switch (status) {
     case weatherStatuses.clear:
-      return <FaSun color="goldenrod" size={75} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={36} style={iconStyles} />;
     case weatherStatuses.mainlyClear:
-      return <FaSun color="goldenrod" size={75} style={iconStyles} />;
+      return <FaSun color="goldenrod" size={36} style={iconStyles} />;
     case weatherStatuses.partlyCloudy:
       return <CiCloudSun color="white" size={90} style={iconStyles} />;
     case weatherStatuses.overcast:
