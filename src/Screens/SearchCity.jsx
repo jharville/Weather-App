@@ -1,6 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import { CustomAddressAutofill } from "./CustomAddressAutofill";
 import "./SearchCity.css";
+import { useState } from "react";
 
 /**
  * SearchCity is a search bar component that has props for handling 3 different submits and setting user input.
@@ -14,6 +15,7 @@ export const SearchCity = ({
   userTextInput,
   setUserTextInput,
 }) => {
+  const [placeholder, setPlaceholder] = useState("Search");
   return (
     <div id="search-Bar-Container">
       <div id="search-City-Text-Field-Container">
@@ -31,15 +33,13 @@ export const SearchCity = ({
             onChange={(event) => setUserTextInput(event.target.value)}
             spellCheck="true"
             onKeyDown={handleEnterPressSubmit}
-            placeholder="Search"
+            placeholder={placeholder}
+            onFocus={() => setPlaceholder("")}
+            onBlur={() => setPlaceholder("Search")}
           />
         </CustomAddressAutofill>
       </div>
-      <button
-        onClick={handleSearchSubmit}
-        id="search-Icon-Button"
-        disabled={!userTextInput.trim()}
-      >
+      <button onClick={handleSearchSubmit} id="search-Icon-Button" disabled={!userTextInput.trim()}>
         <FaSearch id="search-Icon-Button-Sizing" />
       </button>
     </div>
