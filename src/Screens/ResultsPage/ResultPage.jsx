@@ -19,7 +19,7 @@ export const ResultPage = () => {
   const isLoadingRejected = loadingStatus === loadingStatuses.rejected;
   const [, setSearchParams] = useSearchParams();
   const userSearchedCity = new URLSearchParams(window.location.search).get("city");
-  console.log(weather);
+
   const [userTextInput, setUserTextInput] = useState("");
   const trimmedInput = userTextInput.trim();
 
