@@ -6,10 +6,9 @@ const precautionMessages = {
   low: "Minimal sun protection required.",
   moderate: "Wear sunscreen, hat, sunglasses, and seek shade during peak hours.",
   high: "Wear sun protective clothing. Apply sunscreen, and seek shade.",
-  veryHigh:
-    "Seek shade. Wear sun protective clothing and sunscreen. White sand doubles UV exposure.",
+  veryHigh: "Seek shade. Wear sun protective clothing and sunscreen.",
   extreme:
-    "Full precautions! Unprotected skin can burn in minutes. Avoid sun during peak hours. Wear sunscreen and sun protective clothing. White sand doubles UV exposure.",
+    "Unprotected skin can burn in minutes! Avoid sun during peak hours. Wear sunscreen and sun protective clothing.",
   noData: "N/A",
 };
 
