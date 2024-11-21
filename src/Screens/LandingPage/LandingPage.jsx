@@ -33,9 +33,7 @@ export const LandingPage = () => {
       event.preventDefault();
       if (isValid) {
         setSearchParams({ city: userTextInput.trim() });
-        navigate(
-          `/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`
-        );
+        navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
       } else {
         setUserErrorMessage("Please Enter A Valid City");
       }
@@ -67,7 +65,7 @@ export const LandingPage = () => {
         <div id="flex-box-Landing">
           <div className="weather-app-container-Landing">
             <div id="app-title">
-              <h1>Weather Getter</h1>
+              <h1>Weather App</h1>
             </div>
             <SearchCity
               handleSearchSubmit={handleSearchSubmit}
@@ -76,11 +74,7 @@ export const LandingPage = () => {
               userTextInput={userTextInput}
               setUserTextInput={setUserTextInput}
             />
-            <div>
-              {userErrorMessage && (
-                <h1 id="error-message-landing">{userErrorMessage}</h1>
-              )}
-            </div>
+            <div>{userErrorMessage && <h1 id="error-message-landing">{userErrorMessage}</h1>}</div>
           </div>
         </div>
       </div>
