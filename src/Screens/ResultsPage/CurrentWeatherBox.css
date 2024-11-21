@@ -12,10 +12,23 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   padding-top: 10px;
-  padding-right: 15px;
+  padding-right: 10px;
   padding-bottom: 10px;
-  padding-left: 15px;
+  padding-left: 10px;
+}
+
+#current-icon-status-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+#current-icon-status-container svg {
+  min-width: 90px;
+  max-width: 200px;
+  min-height: 100px;
 }
 
 #current-weather-temp-container {
@@ -46,13 +59,6 @@
   white-space: nowrap;
 }
 
-#temp-loading-text {
-  padding-right: 20px;
-  padding-bottom: 10px;
-  color: #27ff00;
-  font-size: 0.5em;
-}
-
 #current-time {
   color: white;
   font-weight: 350;
@@ -75,7 +81,7 @@
   justify-content: space-between;
 }
 
-#bottom-current-box {
+#bottom-element-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,6 +101,10 @@
   font-weight: 350;
   font-size: 4em;
   font-family: "Roboto", sans-serif;
+}
+
+#minus-symbol {
+  padding-right: 5px;
 }
 
 #fahrenheit-symbol {
@@ -125,15 +135,15 @@
 
 #humidity-icon {
   position: relative;
-  cursor: pointer;
+  cursor: help;
   color: white;
-  font-size: 2em;
+  font-size: 2.5em;
 }
 
 #humidity-icon::after {
   position: absolute;
-  top: -90%;
-  left: 100%;
+  top: -75%;
+  left: 55%;
   transform: translateX(-50%);
   opacity: 0;
   transition: opacity 0.3s;
@@ -141,9 +151,13 @@
   background-color: #33343f;
   padding: 5px;
   content: "Humidity";
-  color: white;
-  font-size: 0.5em;
+  color: rgb(255, 255, 255);
+  font-size: 0.4em;
   white-space: nowrap;
+}
+
+#humidity-icon:hover {
+  color: #03b5f0;
 }
 
 #humidity-icon:hover::after {
@@ -156,34 +170,21 @@
   gap: 5px;
   color: rgb(255, 254, 254);
   font-weight: 350;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-family: "Roboto", sans-serif;
 }
 
 #wind-mph {
   color: white;
-  font-size: 0.7em;
+  font-size: 0.5em;
 }
 
 #wind-icon {
   position: relative;
-  cursor: pointer;
-  padding-top: 4px;
+  bottom: 8px;
+  cursor: help;
+  width: 50%;
   color: white;
-  font-size: 1.5em;
-}
-
-@keyframes shift {
-  33% {
-    transform: translateX(-15px);
-  }
-  66% {
-    transform: translateX(15px);
-  }
-}
-
-#wind-icon:hover {
-  animation: shift 1s ease-in-out infinite;
 }
 
 #wind-icon-message {
@@ -194,7 +195,7 @@
 
 #wind-icon-message::after {
   position: absolute;
-  top: -110%;
+  top: -65%;
   left: 45%;
   transform: translateX(-50%);
   opacity: 0;
@@ -212,51 +213,20 @@
   opacity: 1;
 }
 
-#rain-value-and-percent-container {
+#loading-text-and-icon {
   display: flex;
   flex-direction: row;
-  gap: 5px;
-  color: rgb(255, 254, 254);
-  font-weight: 350;
-  font-size: 1.4em;
-  font-family: "Roboto", sans-serif;
+  justify-content: center;
+  align-items: center;
+  padding-top: 130px;
 }
 
-#rain-percent-sign {
+#loading-text {
+  padding-right: 20px;
+  padding-bottom: 10px;
   color: white;
-  font-size: 0.7em;
-}
-
-#rain-icon {
-  position: relative;
-  transition: color 0.3s ease, opacity 0.3s ease;
-  cursor: pointer;
-  color: white;
-  font-size: 1.8em;
-}
-
-#rain-icon:hover {
-  color: #02137e;
-}
-
-#rain-icon::after {
-  position: absolute;
-  right: -160%;
-  bottom: 130%;
-  transform: translateX(-50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  border-radius: 5px;
-  background-color: #33343f;
-  padding: 5px;
-  content: "Rain Chance";
-  color: white;
-  font-size: 0.49em;
-  white-space: nowrap;
-}
-
-#rain-icon:hover::after {
-  opacity: 1;
+  font-size: 2em;
+  font-family: "Orbitron", sans-serif;
 }
 
 #error-message-current-box {
@@ -265,9 +235,9 @@
   justify-content: center;
   align-items: center;
   z-index: 1;
-  padding-top: 50px;
+  padding-top: 110px;
   color: rgb(22, 22, 22);
   font-size: 2em;
-  font-family: fantasy;
+  font-family: "Orbitron", sans-serif;
   text-align: center;
 }

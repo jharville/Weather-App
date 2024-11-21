@@ -1,5 +1,5 @@
 import "./ResultPage.css";
-import { getWeatherLabel, getWeatherIcon } from "../getWeatherStatus.jsx";
+import { getWeatherLabel } from "../getWeatherStatus.jsx";
 import BackgroundVideo from "../../assets/AdobeStock_712855701_Video_HD_Preview.mov";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { SearchCity } from "../SearchCity.jsx";
@@ -17,11 +17,9 @@ export const ResultPage = () => {
   const isLoading = loadingStatus === loadingStatuses.loading;
   const isLoadingDone = loadingStatus === loadingStatuses.fulfilled;
   const isLoadingRejected = loadingStatus === loadingStatuses.rejected;
-
   const [, setSearchParams] = useSearchParams();
-
   const userSearchedCity = new URLSearchParams(window.location.search).get("city");
-
+  console.log(weather);
   const [userTextInput, setUserTextInput] = useState("");
   const trimmedInput = userTextInput.trim();
 
@@ -109,12 +107,13 @@ export const ResultPage = () => {
                       isLoading={isLoading}
                       isLoadingDone={isLoadingDone}
                       isLoadingRejected={isLoadingRejected}
+                      weather={weather}
                       weatherFetchError={weatherFetchError}
                       newCity={`${city || ""} ${country || ""}`}
                       temperature={Math.round(weather?.current?.temperature_2m)}
                       generalWeatherCondition={getWeatherLabel(weather?.current?.weather_code)}
                       humidity={Math.round(weather?.current?.relative_humidity_2m)}
-                      windSpeed={weather?.current?.wind_speed_10m}
+                      windSpeed={Math.round(weather?.current?.wind_speed_10m)}
                       rain={Math.round(weather?.current?.rain)}
                     />
                   </div>
