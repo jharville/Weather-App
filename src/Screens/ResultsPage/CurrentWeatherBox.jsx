@@ -4,7 +4,6 @@ import { getWeatherIcon } from "../getWeatherStatus.jsx";
 import { WiHumidity } from "react-icons/wi";
 import ReactAnimatedWeather from "react-animated-weather";
 import { LoadingIcon } from "../LoadingIcon.jsx";
-// import { DaylightArc } from "./SunPositionTracker.jsx";
 import { format, parseISO, addMinutes } from "date-fns";
 import { SunPositionTracker } from "./SunPositionTracker";
 
@@ -28,6 +27,7 @@ export const CurrentWeatherBox = ({
 }) => {
   // Per chat, and my experience, the time returned from open-mateo is not always updated in real time.
   // The hour is always correct and the local times around the world are correct, but the minutes are up to 10 minutes off.
+  // In addition, it seems like the results of the time are being cached. I'm not sure how, because the weather fetch is setup to prevent that.
   // This is frustrating because if you log the time via weather?.current?.time, you'll see that other variables
   // update but time doesn't. I may need to use another package for time. I'd like your opinion here.
 
@@ -66,6 +66,7 @@ export const CurrentWeatherBox = ({
         <p id="current-weather-city-name">{newCity}</p>
         <div id="current-time">{formattedTime}</div>
       </div>
+
       <div id="current-weather-middle-row-container">
         <div id="current-icon-status-container">{generalWeatherIcon}</div>
         <div id="current-weather-temp-container">
@@ -77,19 +78,20 @@ export const CurrentWeatherBox = ({
                 <p id="fahrenheit-symbol">{`\u00B0F`}</p>
               </div>
             </h1>
-
             <p id="current-weather-condition-text">{generalWeatherCondition}</p>
           </div>
         </div>
       </div>
 
       <div id="current-weather-bottom-row-container">
-        <div id="bottom-element-box">
-          <SunPositionTracker
-            sunriseTime={weather?.daily?.sunrise[0]}
-            sunsetTime={weather?.daily?.sunset[0]}
-            currentTime={weather?.current?.time}
-          />
+        <div id="sun-tracker-message">
+          <div id="bottom-element-box">
+            <SunPositionTracker
+              sunriseTime={weather?.daily?.sunrise[0]}
+              sunsetTime={weather?.daily?.sunset[0]}
+              currentTime={weather?.current?.time}
+            />
+          </div>
         </div>
         <div id="bottom-element-box">
           <div id="wind-value-mph-container">

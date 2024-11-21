@@ -199,7 +199,6 @@ export const SummaryChart = ({
       // PREVENT DEFAULT ERROR IS RELATED TO ZOOM CONTAINER.
       // Seems to be an issue with the package's source code.
       // https://github.com/FormidableLabs/victory/issues/2004
-
       return (
         <VictoryZoomContainer
           standalone={true}
@@ -218,17 +217,6 @@ export const SummaryChart = ({
           allowPan={true}
           zoomDimension="x"
           zoomDomain={{ x: [1, hourlyTempArray.length - 14.5] }}
-        />
-      );
-    };
-    const getDetailsContainerComponent = () => {
-      return (
-        <VictoryZoomContainer
-          standalone={true}
-          allowZoom={false}
-          allowPan={true}
-          zoomDimension="x"
-          zoomDomain={{ x: [1, hourlyTempArray.length - 13.5] }}
         />
       );
     };

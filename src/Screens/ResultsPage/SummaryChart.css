@@ -8,6 +8,8 @@
   position: absolute;
   bottom: 0;
   background: linear-gradient(to top, #2e3192 30%, rgba(255, 253, 253, 0) 70%);
+  /* overflow-x: scroll; */
+  overflow-y: hidden;
 }
 
 #victory-chart-container {
@@ -16,10 +18,7 @@
   cursor: grab;
   border-radius: 20px;
   height: 100%;
-  overflow-x: auto;
   overflow-y: hidden;
-  scroll-behavior: smooth;
-  touch-action: none;
   font-family: "Roboto", sans-serif;
 }
 
@@ -88,10 +87,6 @@
   align-items: center;
   padding-top: 60px;
 }
-
-/* #custom-tick-labels {
-  z-index: 99;
-} */
 
 #icon-and-label-container {
   display: flex;
