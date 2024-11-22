@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./CurrentWeatherBox.css";
 import { getWeatherIcon } from "../getWeatherStatus.jsx";
 import { WiHumidity } from "react-icons/wi";
@@ -45,12 +45,16 @@ export const CurrentWeatherBox = ({
     }
   }, [rawTime]);
 
-  const formattedTime = incrementedTime ? format(incrementedTime, "h:mm a") : null;
+  const formattedTime = incrementedTime
+    ? format(incrementedTime, "h:mm a")
+    : null;
 
   const formattedHumidity = humidity || null;
   const formattedWindSpeed = windSpeed || null;
   const formattedTemperature = temperature || null;
-  const generalWeatherIcon = isLoadingDone ? getWeatherIcon(generalWeatherCondition) : null;
+  const generalWeatherIcon = isLoadingDone
+    ? getWeatherIcon(generalWeatherCondition)
+    : null;
 
   return weatherFetchError ? (
     <div id="error-message-current-box">{weatherFetchError}</div>
@@ -73,7 +77,9 @@ export const CurrentWeatherBox = ({
           <div>
             <h1 id="temp">
               <div id="temp-and-fahrenheit-box">
-                <span id="minus-symbol">{formattedTemperature < 0 ? "-" : ""}</span>
+                <span id="minus-symbol">
+                  {formattedTemperature < 0 ? "-" : ""}
+                </span>
                 {Math.abs(formattedTemperature)}
                 <p id="fahrenheit-symbol">{`\u00B0F`}</p>
               </div>

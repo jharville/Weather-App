@@ -11,14 +11,18 @@ import { MapDisplay } from "./MapDisplay.jsx";
 import { ForecastBox } from "./ForecastBox.jsx";
 import { UVBox } from "./UVBox.jsx";
 import { SummaryChart } from "./SummaryChart.jsx";
+import { useCallback } from "react";
 
 export const ResultPage = () => {
-  const { weather, fetchWeather, loadingStatus, weatherFetchError } = useWeatherFetch();
+  const { weather, fetchWeather, loadingStatus, weatherFetchError } =
+    useWeatherFetch();
   const isLoading = loadingStatus === loadingStatuses.loading;
   const isLoadingDone = loadingStatus === loadingStatuses.fulfilled;
   const isLoadingRejected = loadingStatus === loadingStatuses.rejected;
   const [, setSearchParams] = useSearchParams();
-  const userSearchedCity = new URLSearchParams(window.location.search).get("city");
+  const userSearchedCity = new URLSearchParams(window.location.search).get(
+    "city"
+  );
 
   const [userTextInput, setUserTextInput] = useState("");
   const trimmedInput = userTextInput.trim();
@@ -30,30 +34,18 @@ export const ResultPage = () => {
   };
 
   const navigate = useNavigate();
-  const handleHomeClick = () => {
+  const handleHomeClick = useCallback(() => {
     navigate("/");
-  };
+  }, [navigate]);
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    setUserTextInput("");
-    setSearchParams({ city: trimmedInput });
-  };
-
-  const handleEnterPressSubmit = (event) => {
-    if (event.key === "Enter") {
+  const handleSearchSubmit = useCallback(
+    (event) => {
       event.preventDefault();
       setUserTextInput("");
       setSearchParams({ city: trimmedInput });
-      handleSearchSubmit(event);
-    }
-  };
-
-  const handleSuggestionClick = (city) => {
-    const cityName = city.display_name;
-    setUserTextInput("");
-    setSearchParams({ city: cityName });
-  };
+    },
+    [setSearchParams, trimmedInput]
+  );
 
   //For displaying only the city and country/city returned from the autofill.
   const [city, country] = (() => {
@@ -74,7 +66,11 @@ export const ResultPage = () => {
   }, [userSearchedCity, fetchWeather]);
 
   const formattedUV = Math.round(weather?.daily?.uv_index_max[0]);
-  const formattedSunHours = Math.round(weather?.daily?.sunshine_duration[0] / 3600);
+  const formattedSunHours = Math.round(
+    weather?.daily?.sunshine_duration[0] / 3600
+  );
+
+  const weatherLabel = getWeatherLabel(weather?.current?.weather_code);
 
   return (
     <>
@@ -91,16 +87,14 @@ export const ResultPage = () => {
           <div id="whole-page-contents-without-sidebar">
             <div id="parent-of-flex-grid-container">
               <div id="flex-grid-containers-total">
-                <div id="grid-row-w-search-bar">
+                <form onSubmit={handleSearchSubmit} id="grid-row-w-search-bar">
                   <SearchCity
-                    handleEnterPressSubmit={handleEnterPressSubmit}
-                    handleSearchSubmit={handleSearchSubmit}
-                    handleSuggestionClick={handleSuggestionClick}
+                    handleSearch={handleSearchSubmit}
                     userTextInput={userTextInput}
                     setUserTextInput={setUserTextInput}
                   />
                   <div id="map-uv-container-invisible" />
-                </div>
+                </form>
                 <div id="grid-row">
                   <div id="current-weather-box">
                     <CurrentWeatherBox
@@ -111,8 +105,10 @@ export const ResultPage = () => {
                       weatherFetchError={weatherFetchError}
                       newCity={`${city || ""} ${country || ""}`}
                       temperature={Math.round(weather?.current?.temperature_2m)}
-                      generalWeatherCondition={getWeatherLabel(weather?.current?.weather_code)}
-                      humidity={Math.round(weather?.current?.relative_humidity_2m)}
+                      generalWeatherCondition={weatherLabel}
+                      humidity={Math.round(
+                        weather?.current?.relative_humidity_2m
+                      )}
                       windSpeed={Math.round(weather?.current?.wind_speed_10m)}
                       rain={Math.round(weather?.current?.rain)}
                     />
@@ -156,7 +152,7 @@ export const ResultPage = () => {
                       dayClickedIndex={dayClickedIndex}
                       forecastDate={weather?.daily?.time}
                       weathercodes={weather?.daily?.weather_code}
-                      generalWeatherCondition={getWeatherLabel(weather?.current?.weather_code)}
+                      generalWeatherCondition={weatherLabel}
                     />
                   </div>
                 </div>

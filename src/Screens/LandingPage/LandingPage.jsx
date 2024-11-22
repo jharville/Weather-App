@@ -4,50 +4,30 @@ import { SearchCity } from "../SearchCity";
 import BackgroundVideoCompressed from "../../assets/Weather_App_Background_Video_Compressed.mp4";
 import "./LandingPage.css";
 import { isValidAddress } from "../isValidAddress";
-
+import { useCallback } from "react";
 export const LandingPage = () => {
   const [userTextInput, setUserTextInput] = useState("");
   const [, setSearchParams] = useSearchParams();
   const [userErrorMessage, setUserErrorMessage] = useState(null);
   const navigate = useNavigate();
 
-  const isValid = async (userTextInput) => {
-    const valid = await isValidAddress(userTextInput.trim());
-    if (valid) {
-      return true;
-    }
-  };
+  const updateCitySearchParam = useCallback(() => {
+    return setSearchParams({ city: userTextInput });
+  }, [setSearchParams, userTextInput]);
 
-  const handleSearchSubmit = async (event) => {
-    if (isValid) {
+  const handleSearchSubmit = useCallback(
+    async (event) => {
       event.preventDefault();
-      setSearchParams({ city: userTextInput.trim() });
-      navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
-    } else {
-      setUserErrorMessage("Please Enter A Valid City");
-    }
-  };
-
-  const handleEnterPressSubmit = async (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
+      const isValid = await isValidAddress(userTextInput);
       if (isValid) {
-        setSearchParams({ city: userTextInput.trim() });
-        navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
+        updateCitySearchParam();
+        navigate(`/ResultPage?city=${encodeURIComponent(userTextInput)}`);
       } else {
         setUserErrorMessage("Please Enter A Valid City");
       }
-    }
-  };
-
-  const handleSuggestionClick = async () => {
-    if (isValid) {
-      setSearchParams({ city: userTextInput.trim() });
-      navigate(`/ResultPage?city=${encodeURIComponent(userTextInput.trim())}`);
-    } else {
-      setUserErrorMessage("Please Enter A Valid City");
-    }
-  };
+    },
+    [navigate, updateCitySearchParam, userTextInput]
+  );
 
   return (
     <>
@@ -67,14 +47,18 @@ export const LandingPage = () => {
             <div id="app-title">
               <h1>Weather App</h1>
             </div>
-            <SearchCity
-              handleSearchSubmit={handleSearchSubmit}
-              handleEnterPressSubmit={handleEnterPressSubmit}
-              handleSuggestionClick={handleSuggestionClick}
-              userTextInput={userTextInput}
-              setUserTextInput={setUserTextInput}
-            />
-            <div>{userErrorMessage && <h1 id="error-message-landing">{userErrorMessage}</h1>}</div>
+            <form onSubmit={handleSearchSubmit}>
+              <SearchCity
+                handleSearch={handleSearchSubmit}
+                userTextInput={userTextInput}
+                setUserTextInput={setUserTextInput}
+              />
+            </form>
+            <div>
+              {userErrorMessage && (
+                <h1 id="error-message-landing">{userErrorMessage}</h1>
+              )}
+            </div>
           </div>
         </div>
       </div>

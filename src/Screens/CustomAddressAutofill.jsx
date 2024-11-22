@@ -1,22 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./CustomAddressAutofill.css";
 
-// Global variable to store timeout ID for the debounce function
-let timer;
-// Debounce function: delays the execution of a function by a specified time (delay)
-const debounce = (callbackFunction, delay) => {
-  return (searchedCity) => {
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-      callbackFunction(searchedCity);
-    }, delay);
-  };
-};
-
 export const CustomAddressAutofill = ({
   onAcceptedSuggestion,
-  onNotSuggestionSubmit,
   searchedCity,
   children,
 }) => {
@@ -39,7 +26,7 @@ export const CustomAddressAutofill = ({
         return setSuggestions([]);
       }
     };
-    // waits 600 ms before suggestions are fetched
+    // waits 500 ms before suggestions are fetched
     const debouncedFetchSuggestions = debounce(fetchSuggestions, 500);
 
     // invokes the debounced function
@@ -49,22 +36,6 @@ export const CustomAddressAutofill = ({
     return () => clearTimeout(timer);
   }, [searchedCity]);
 
-  const handleSuggestionClick = useCallback(
-    (city) => {
-      if (onAcceptedSuggestion) {
-        onAcceptedSuggestion(city); // notifies parent component (SearchCity) and triggers search
-        setSuggestions([]);
-      }
-    },
-    [onAcceptedSuggestion]
-  );
-
-  useEffect(() => {
-    if (onNotSuggestionSubmit) {
-      setSuggestions([]);
-    }
-  }, [onNotSuggestionSubmit]);
-
   return (
     <div>
       {children}
@@ -72,7 +43,7 @@ export const CustomAddressAutofill = ({
         <div id="custom-address-autofill-result">
           <ul>
             {suggestions.slice(0, 3).map((city) => (
-              <li key={city.place_id} onClick={() => handleSuggestionClick(city)}>
+              <li key={city.place_id} onClick={onAcceptedSuggestion}>
                 {city.display_name}
               </li>
             ))}
@@ -81,4 +52,16 @@ export const CustomAddressAutofill = ({
       )}
     </div>
   );
+};
+
+// Global variable to store timeout ID for the debounce function
+let timer;
+// Debounce function: delays the execution of a function by a specified time (delay)
+const debounce = (callbackFunction, delay) => {
+  return (searchedCity) => {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      callbackFunction(searchedCity);
+    }, delay);
+  };
 };

@@ -1,7 +1,7 @@
 import { FaSearch } from "react-icons/fa";
 import { CustomAddressAutofill } from "./CustomAddressAutofill";
 import "./SearchCity.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 /**
  * SearchCity is a search bar component that has props for handling 3 different submits and setting user input.
@@ -9,37 +9,50 @@ import { useState } from "react";
  * It is not responsible for the weather fetch itself.
  */
 export const SearchCity = ({
-  handleEnterPressSubmit,
-  handleSearchSubmit,
-  handleSuggestionClick,
+  handleSearch,
   userTextInput,
   setUserTextInput,
 }) => {
-  const [placeholder, setPlaceholder] = useState("Search");
+  const [isFocused, setIsFocused] = useState("");
+  const searchBarHasInput = !!userTextInput?.trim();
+  let placeholder;
+  if (!isFocused) {
+    placeholder = "Search";
+  }
+
+  const handleInput = useCallback(
+    (e) => setUserTextInput(e.target.value),
+    [setUserTextInput]
+  );
+
+  const handleFocus = useCallback(() => setIsFocused(true), []);
+  const handleBlur = useCallback(() => setIsFocused(false), []);
+
   return (
     <div id="search-Bar-Container">
       <div id="search-City-Text-Field-Container">
         <CustomAddressAutofill
-          onAcceptedSuggestion={handleSuggestionClick}
-          onNotSuggestionSubmit={handleSearchSubmit}
+          onAcceptedSuggestion={handleSearch}
           searchedCity={userTextInput}
-          clearSuggestions={handleSearchSubmit}
         >
           <input
             autoComplete="off"
             id="search-City-Text-Field"
             type="text"
             value={userTextInput}
-            onChange={(event) => setUserTextInput(event.target.value)}
+            onChange={handleInput}
             spellCheck="true"
-            onKeyDown={handleEnterPressSubmit}
             placeholder={placeholder}
-            onFocus={() => setPlaceholder("")}
-            onBlur={() => setPlaceholder("Search")}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
         </CustomAddressAutofill>
       </div>
-      <button onClick={handleSearchSubmit} id="search-Icon-Button" disabled={!userTextInput.trim()}>
+      <button
+        onClick={handleSearch}
+        id="search-Icon-Button"
+        disabled={!searchBarHasInput}
+      >
         <FaSearch id="search-Icon-Button-Sizing" />
       </button>
     </div>
