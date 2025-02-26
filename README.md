@@ -1,7 +1,7 @@
 # Weather App
 A simple web app that displays local weather variables based on search.
 
-##📦 Installation:
+📦 Installation:
 - Clone the repo
 - run `npm install` (instructions for installing npm can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) if you dont already have it)
 
